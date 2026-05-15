@@ -1,0 +1,23 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import HomeHero from '@components/sections/HomeHero.astro';
+import HomeCards from '@components/sections/HomeCards.astro';
+import LatestArtifact from '@components/sections/LatestArtifact.astro';
+import { getTranslations, t } from '@/i18n/utils';
+
+const locale = Astro.currentLocale || 'en';
+const translations = getTranslations(locale as 'en' | 'vi');
+---
+
+<Layout
+  title={t(translations, 'meta.homeTitle')}
+  description={t(translations, 'meta.homeDescription')}
+  ogTitle={t(translations, 'meta.ogHomeTitle')}
+  image="/og-default.png"
+>
+  <div class="artifact home-artifact">
+    <HomeHero locale={locale as 'en' | 'vi'} />
+    <HomeCards locale={locale as 'en' | 'vi'} />
+    <LatestArtifact locale={locale as 'en' | 'vi'} />
+  </div>
+</Layout>

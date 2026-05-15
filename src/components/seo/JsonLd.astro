@@ -1,0 +1,111 @@
+---
+import { SITE_URL, SAME_AS } from '@/config/social-links';
+
+export interface BreadcrumbItem {
+  name: string;
+  item: string;
+}
+
+export interface Props {
+  schema: 'person' | 'article' | 'website' | 'webpage' | 'breadcrumb';
+  data?: Record<string, unknown>;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { schema, data = {}, breadcrumbs = [] } = Astro.props;
+
+function buildPersonSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: (data.name as string) || 'Jeremy Nguyen',
+    jobTitle: (data.jobTitle as string) || 'Software Engineer',
+    url: SITE_URL,
+    sameAs: (data.sameAs as string[]) || SAME_AS.slice(0, 2),
+    ...data,
+  };
+}
+
+function buildArticleSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: (data.headline as string) || 'Article',
+    author: {
+      '@type': 'Person',
+      name: (data.author as string) || 'Jeremy Nguyen',
+    },
+    datePublished: (data.datePublished as string) || new Date().toISOString(),
+    dateModified:
+      (data.dateModified as string) ||
+      (data.datePublished as string) ||
+      new Date().toISOString(),
+    ...data,
+  };
+}
+
+function buildWebsiteSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: (data.name as string) || 'Jeremy Nguyen',
+    url: SITE_URL,
+    ...data,
+  };
+}
+
+function buildWebPageSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: (data.name as string) || 'Jeremy Nguyen',
+    url: (data.url as string) || SITE_URL,
+    ...data,
+  };
+}
+
+function buildBreadcrumbSchema(): Record<string, unknown> {
+  const items = breadcrumbs.length
+    ? breadcrumbs
+    : [
+        { name: 'Home', item: SITE_URL },
+        { name: (data.name as string) || 'Page', item: (data.url as string) || SITE_URL },
+      ];
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.item,
+    })),
+  };
+}
+
+let structuredData: Record<string, unknown>;
+
+switch (schema) {
+  case 'person':
+    structuredData = buildPersonSchema();
+    break;
+  case 'article':
+    structuredData = buildArticleSchema();
+    break;
+  case 'website':
+    structuredData = buildWebsiteSchema();
+    break;
+  case 'webpage':
+    structuredData = buildWebPageSchema();
+    break;
+  case 'breadcrumb':
+    structuredData = buildBreadcrumbSchema();
+    break;
+  default:
+    structuredData = buildWebsiteSchema();
+}
+
+const json = JSON.stringify(structuredData);
+---
+
+<script is:inline type="application/ld+json" set:html={json} />

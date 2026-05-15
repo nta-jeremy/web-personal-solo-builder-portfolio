@@ -1,0 +1,16 @@
+{
+  "domains": [
+    "React",
+    "Vue.js",
+    "Go",
+    "Node.js",
+    "PostgreSQL",
+    "Kafka",
+    "Elasticsearch",
+    "Redis",
+    "AWS",
+    "Docker",
+    "System Design",
+    "Microservices"
+  ]
+}

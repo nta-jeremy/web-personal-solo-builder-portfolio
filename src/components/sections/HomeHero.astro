@@ -1,0 +1,41 @@
+---
+import StreamText from '@components/islands/StreamText';
+import { getTranslations, t } from '@/i18n/utils';
+
+export interface Props {
+  locale?: 'en' | 'vi';
+}
+
+const { locale = 'en' } = Astro.props;
+const translations = getTranslations(locale);
+---
+
+<div>
+  <div
+    style="font-size: 11px; color: var(--accent); letter-spacing: 0.18em; font-weight: 600; margin-bottom: 16px;"
+  >
+    <span
+      style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle;"
+    ></span>
+    {t(translations, 'home.status')}
+  </div>
+
+  <h1
+    class="serif"
+    style="font-size: 68px; font-weight: 500; line-height: 1.02; letter-spacing: -0.025em; margin: 0 0 22px;"
+  >
+    <StreamText client:idle text={t(translations, 'home.title')} />
+    <span
+      style="display: inline-block; animation: wave 1.4s ease-in-out 0.8s;"
+      aria-hidden="true"
+    >
+      👋
+    </span>
+  </h1>
+
+  <p
+    style="font-size: 19px; line-height: 1.55; color: var(--ink-2); max-width: 560px; margin: 0 0 40px;"
+  >
+    {t(translations, 'home.subtitle')}
+  </p>
+</div>

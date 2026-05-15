@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import { getTranslations, t } from '@/i18n/utils';
+
+export interface Props {
+  locale?: 'en' | 'vi';
+}
+
+const { locale = 'vi' } = Astro.props;
+const translations = getTranslations(locale);
+
+const allPosts = await getCollection('blog');
+
+const posts = allPosts
+  .filter((p) => !p.data.draft && !p.data.hidden && p.data.locale === locale)
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  );
+
+const latest = posts[0];
+---
+
+{
+  latest ? (
+    <div
+      style="margin-top: 56px; padding: 24px; background: var(--bg-alt); border-radius: 16px; border: 1px solid var(--border);"
+    >
+      <div
+        style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap;"
+      >
+        <span
+          style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent);"
+        />
+        <span
+          style="font-size: 10.5px; letter-spacing: 0.16em; font-weight: 600; color: var(--accent);"
+        >
+          {t(translations, 'home.latestArtifact')}
+        </span>
+        <span style="margin-left: auto; font-size: 11px; color: var(--subtle);">
+          {new Date(latest.data.pubDate).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          }).toUpperCase()}
+        </span>
+      </div>
+
+      <h2
+        class="serif"
+        style="font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em;"
+      >
+        {latest.data.title}
+      </h2>
+
+      <p
+        style="font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.6;"
+      >
+        {latest.data.description}
+      </p>
+
+      <a
+        href={`/${locale === 'en' ? 'en/' : ''}blog/${latest.id.replace(/^(en|vi)\//, '')}/`}
+        style="font-size: 13px; color: var(--accent); font-weight: 500; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; min-height: 44px;"
+      >
+        {t(translations, 'home.latestRead')}
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          width="14"
+          height="14"
+        >
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  ) : (
+    <div
+      style="margin-top: 56px; padding: 24px; background: var(--bg-alt); border-radius: 16px; border: 1px solid var(--border);"
+    >
+      <div
+        style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;"
+      >
+        <span
+          style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent);"
+        />
+        <span
+          style="font-size: 10.5px; letter-spacing: 0.16em; font-weight: 600; color: var(--accent);"
+        >
+          {t(translations, 'home.latestArtifact')}
+        </span>
+      </div>
+      <p style="font-size: 14px; color: var(--muted); margin: 0; line-height: 1.6;">
+        {t(translations, 'home.noArtifact')}
+      </p>
+    </div>
+  )
+}

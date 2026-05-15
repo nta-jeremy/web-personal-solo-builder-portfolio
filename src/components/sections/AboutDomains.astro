@@ -1,0 +1,53 @@
+---
+import { t } from '@/i18n/utils';
+
+export interface Props {
+  translations: Record<string, unknown>;
+  domains: string[];
+}
+
+const { translations, domains } = Astro.props;
+---
+
+<section class="about-domains">
+  <span class="about-section-label">{t(translations, 'about.domainsLabel')}</span>
+  <div class="about-tags">
+    {domains.map((domain) => (
+      <span class="about-tag">{domain}</span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .about-domains {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .about-domains {
+      margin-bottom: 48px;
+    }
+  }
+  .about-section-label {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .about-tag {
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    background: var(--bg-alt);
+    padding: 7px 14px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    letter-spacing: 0.02em;
+  }
+</style>

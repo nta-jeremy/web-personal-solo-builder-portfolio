@@ -1,0 +1,93 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getTranslations, t } from '@/i18n/utils';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const locale = Astro.currentLocale || 'vi';
+const translations = getTranslations(locale as 'en' | 'vi');
+
+const title = t(translations, 'error404.title');
+const heading = t(translations, 'error404.heading');
+const subtitle = t(translations, 'error404.subtitle');
+const cta = t(translations, 'error404.cta');
+
+const homeUrl = getRelativeLocaleUrl(locale, '/');
+---
+
+<Layout title={title} description={t(translations, 'meta.error404Description')} noindex={true} image="/og-default.png">
+  <div class="error-page">
+    <div class="error-content">
+      <h1 class="error-heading">{heading}</h1>
+      <p class="error-subtitle">{subtitle}</p>
+      <a href={homeUrl} class="error-cta">{cta}</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 40px 18px;
+  }
+
+  .error-content {
+    text-align: center;
+    max-width: 480px;
+  }
+
+  .error-heading {
+    font-family: var(--font-serif);
+    font-size: 72px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .error-subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 32px;
+  }
+
+  .error-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border-2);
+    background: var(--bg-alt);
+    color: var(--ink);
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .error-cta:hover {
+    border-color: var(--ink);
+    background: var(--sand);
+  }
+
+  @media (min-width: 768px) {
+    .error-page {
+      min-height: 70vh;
+      padding: 64px 40px;
+    }
+
+    .error-heading {
+      font-size: 96px;
+    }
+
+    .error-subtitle {
+      font-size: 16px;
+    }
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import { getTranslations, t } from '@/i18n/utils';
+
+export interface Props {
+  locale?: 'en' | 'vi';
+}
+
+const { locale = 'en' } = Astro.props;
+const translations = getTranslations(locale);
+
+const prefix = locale === 'en' ? '/en' : '';
+
+const cards = [
+  {
+    title: t(translations, 'home.ctaEssays'),
+    desc: t(translations, 'home.ctaEssaysDesc'),
+    href: `${prefix}/blog`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M4 17a3 3 0 0 1 3-3h12"/></svg>`,
+  },
+  {
+    title: t(translations, 'home.ctaWork'),
+    desc: t(translations, 'home.ctaWorkDesc'),
+    href: `${prefix}/projects`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="12" cy="12" r="9"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M12 12l-2.5 4.5L14 14l-2-2z" fill="currentColor" stroke="none"/></svg>`,
+  },
+  {
+    title: t(translations, 'home.ctaAbout'),
+    desc: t(translations, 'home.ctaAboutDesc'),
+    href: `${prefix}/about`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg>`,
+  },
+  {
+    title: t(translations, 'home.ctaContact'),
+    desc: t(translations, 'home.ctaContactDesc'),
+    href: `${prefix}/contact`,
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>`,
+  },
+];
+---
+
+<div
+  style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;"
+>
+  {
+    cards.map((card) => (
+      <a
+        href={card.href}
+        class="home-card"
+        style="padding: 20px 22px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-alt); display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; cursor: pointer; transition: border-color 0.15s; text-decoration: none;"
+      >
+        <div>
+          <div style="font-size: 15px; font-weight: 500; margin-bottom: 4px;">
+            {card.title}
+          </div>
+          <div style="font-size: 12.5px; color: var(--muted);">{card.desc}</div>
+        </div>
+        <span
+          style="color: var(--subtle); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;"
+          set:html={card.icon}
+        />
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .home-card:hover {
+    border-color: var(--ink);
+  }
+
+  @media (max-width: 767px) {
+    div[style*='grid-template-columns: repeat(2, 1fr)'] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

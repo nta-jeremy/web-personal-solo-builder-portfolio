@@ -1,0 +1,9 @@
+name = "web-personal-astro-jeremy-tech"
+compatibility_date = "2026-04-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+[vars]
+AI_PROVIDER_PRIORITY = "yescale,deepseek,gemini,openai,anthropic"
+YESCALE_MODEL = "gemini-2.5-flash-lite"
+DEEPSEEK_MODEL = "deepseek-v4-flash"

@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "Auto"
+  },
+  "home": {
+    "status": "CURRENTLY ONLINE",
+    "title": "Hi, I'm Jeremy.",
+    "subtitle": "A Product Engineer and solo builder working on the seam between distributed systems and human cognition. I write, ship, and occasionally publish essays from my workshop.",
+    "ctaEssays": "Read the essays",
+    "ctaEssaysDesc": "28 pieces on systems & craft",
+    "ctaWork": "See the work",
+    "ctaWorkDesc": "12 shipped projects",
+    "ctaAbout": "About Jeremy",
+    "ctaAboutDesc": "Bio, chronology, stack",
+    "ctaContact": "Start a conversation",
+    "ctaContactDesc": "Collaborations welcome",
+    "latestArtifact": "LATEST ARTIFACT",
+    "latestRead": "Read essay",
+    "noArtifact": "Coming soon."
+  },
+  "about": {
+    "title": "About",
+    "label": "SOFTWARE ENGINEER",
+    "heading": "Building systems that scale.",
+    "bio1": "Book lover, knowledge seeker, and tech enthusiast. I believe technology is the art of problem-solving.",
+    "bio2": "I run to balance the stresses of life and to sharpen my endurance.",
+    "philosophyLabel": "PHILOSOPHY",
+    "philosophyQuote": "Every line of code is a stroke in a larger portrait of human progress.",
+    "domainsLabel": "TECHNICAL DOMAINS",
+    "timelineLabel": "CAREER TRAJECTORY",
+    "timeline": [
+      { "year": "2024", "title": "Product Engineer & Solo Builder", "desc": "Building AI-native products end-to-end and consulting on system architecture." },
+      { "year": "2021", "title": "Senior Software Engineer (Fullstack)", "desc": "Shipped production systems across frontend, backend, and infrastructure at scale." },
+      { "year": "2019", "title": "Software Engineer (Fullstack)", "desc": "Built real-time data systems and API platforms for early-stage products." },
+      { "year": "2017", "title": "Junior Developer", "desc": "Cut teeth on web stacks and ML inference tooling." }
+    ]
+  },
+  "projects": {
+    "label": "PORTFOLIO · ARCHIVE 2026",
+    "heading": "Selected Artifacts",
+    "subtitle": "A curated collection of shipped projects, experiments, and technical explorations.",
+    "featured": "Featured",
+    "explore": "Explore Technical Specs",
+    "comingSoon": "Coming soon",
+    "filterAll": "All"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "blog": "Blog"
+  },
+  "blog": {
+    "title": "Essays & Artifacts",
+    "archiveLabel": "THE ARCHIVE",
+    "heading": "Thoughts on <em style=\"font-style: italic;\">Cognitive Architecture</em> and the Machine Era.",
+    "subtitle": "Writing on systems, craft, and the philosophy of technology.",
+    "backToArchive": "Back to archive",
+    "readingTime": "min read",
+    "prevPost": "Previous",
+    "nextPost": "Next",
+    "draft": "Draft",
+    "searchPlaceholder": "Search articles...",
+    "postNavAriaLabel": "Post navigation",
+    "authorName": "Written by Jeremy Nguyen",
+    "authorDesc": "Systems, essays, and occasional experiments.",
+    "noPosts": "No posts yet."
+  },
+  "contact": {
+    "title": "Contact",
+    "heading": "Start a Conversation",
+    "subtitle": "Whether you want to collaborate, discuss an idea, or just say hello — my inbox is open.",
+    "emailLabel": "Email",
+    "socialLabel": "Connect",
+    "copyEmail": "Copy email",
+    "emailCopied": "Copied!"
+  },
+  "conversation": {
+    "step1": {
+      "message": "Hello. I'm Jeremy. I'm excited to hear about what you're building. To get started,",
+      "emphasis": "what's your name?",
+      "placeholder": "Type your name…"
+    },
+    "step2": {
+      "message": "Nice to meet you. What email address should I use to follow up with you?",
+      "placeholder": "email@example.com"
+    },
+    "step3": {
+      "message": "Finally, what would you like to talk about? Feel free to be as detailed as you like about your initiative.",
+      "placeholder": "I have an idea for…"
+    },
+    "sendButton": "Send conversation",
+    "sendingButton": "Sending…",
+    "successTitle": "Sent!",
+    "successMessage": "Thanks for reaching out. I'll get back to you soon.",
+    "errorMessage": "Failed to send. Please try again.",
+    "validation": {
+      "nameRequired": "Please enter your name",
+      "emailRequired": "Please enter your email",
+      "emailInvalid": "Invalid email",
+      "topicRequired": "Please enter a topic"
+    }
+  },
+  "chat": {
+    "placeholder": "Ask anything about my work…",
+    "send": "Send",
+    "greeting": "Hi, how can I help you?",
+    "thinking": "Thinking...",
+    "error": "Sorry, something went wrong. Please try again.",
+    "offline": "I'm offline right now. Leave a message and I'll get back to you."
+  },
+  "footer": {
+    "copyright": "Jeremy Nguyen. All rights reserved."
+  },
+  "meta": {
+    "siteName": "Jeremy Nguyen",
+    "siteDescription": "Personal portfolio and blog by Jeremy Nguyen. Writing about AI, system design, and the lines of code I believe in.",
+    "homeTitle": "Jeremy Nguyen · Software Engineer & Technical Leader · Portfolio",
+    "homeDescription": "I build systems that scale. 7+ years as a Software Engineer, from Frontend Developer to Technical Leader. This is where I share what I've learned along the way.",
+    "ogHomeTitle": "Jeremy Nguyen — Software Engineer & Technical Leader · Building Systems That Scale",
+    "aboutTitle": "About · Jeremy Nguyen — Software Engineer & Technical Leader",
+    "aboutDescription": "7+ years in the industry: from Frontend Developer to Software Engineer to Technical Leader. I believe in code that ships.",
+    "ogAboutTitle": "Jeremy's Journey — From Frontend Developer to Technical Leader",
+    "projectsTitle": "Selected Artifacts · Jeremy Nguyen",
+    "projectsDescription": "Projects I've shipped: from production AI systems to technical experiments. Every line of code is a stroke in a larger portrait.",
+    "ogProjectsTitle": "Selected Artifacts — From AI Production to Experiments",
+    "blogTitle": "Essays & Artifacts · Jeremy Nguyen",
+    "blogDescription": "Writing about LLM architecture, system design, and the philosophy of technology. Not copy-paste tutorials — real thoughts.",
+    "ogBlogTitle": "Essays & Artifacts — Thoughts on AI and System Design",
+    "portfolioTitle": "Portfolio · Jeremy Nguyen — Software Engineer & Technical Leader",
+    "portfolioDescription": "A traditional portfolio view of my work: bio, career timeline, skills, and projects. Built with real data.",
+    "ogPortfolioTitle": "Portfolio — Software Engineer & Technical Leader",
+    "contactTitle": "Contact · Jeremy Nguyen — Collaborate & Chat",
+    "contactDescription": "Want to collaborate, hire me as a consultant, or just chat about tech? The door is always open.",
+    "ogContactTitle": "Contact — The Door Is Always Open for Interesting Conversations",
+    "error404Title": "Not Found · 404",
+    "error404Description": "This page doesn't exist. But don't worry — there's plenty more to explore."
+  },
+  "mobile": {
+    "navAbout": "About",
+    "navProjects": "Projects",
+    "navBlog": "Blog",
+    "navContact": "Contact",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu"
+  },
+  "sidebar": {
+    "name": "Jeremy Nguyen",
+    "title": "Software Engineer / Technical Leader",
+    "settings": "Settings",
+    "support": "Support"
+  },
+  "projectDetail": {
+    "label": "Project Detail",
+    "techStack": "Tech Stack",
+    "liveSite": "Live Site",
+    "repository": "Repository",
+    "tags": "Tags"
+  },
+  "error404": {
+    "title": "404 — Page Not Found",
+    "heading": "404",
+    "subtitle": "The page you're looking for doesn't exist or has been moved.",
+    "cta": "Back to home"
+  }
+}

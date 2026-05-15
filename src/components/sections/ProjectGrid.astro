@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from '@components/ui/ProjectCard.astro';
+
+const projects = await getCollection('projects');
+
+const sortedProjects = projects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+---
+
+<section class="project-grid-section">
+  <div class="project-grid">
+    {sortedProjects.map((project, index) => (
+      <ProjectCard project={project} index={index} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .project-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

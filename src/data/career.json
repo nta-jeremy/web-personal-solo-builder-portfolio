@@ -1,0 +1,54 @@
+{
+  "timeline": [
+    {
+      "year": "Jan 2026 — Present",
+      "title": "Technical Leader — YODY",
+      "desc": "Leading technical decisions and architecture for AI-driven retail systems. Driving omnichannel enablement and platform modernization."
+    },
+    {
+      "year": "Jan 2024 — Dec 2025",
+      "title": "Software Developer — YODY",
+      "desc": "Built and maintained core e-commerce infrastructure serving 1M+ users. Implemented microservices architecture with Go and Node.js."
+    },
+    {
+      "year": "Apr 2023 — Dec 2023",
+      "title": "Software Engineer — ScaleUP",
+      "desc": "Developed CRM and operational tools for startup ecosystem. Delivered full-stack solutions with React and PostgreSQL."
+    },
+    {
+      "year": "Jun 2022 — Apr 2023",
+      "title": "Software Engineer — Hoang Phuc International",
+      "desc": "Engineered e-commerce platform processing 3000+ orders daily. Optimized database queries reducing latency by 40%."
+    },
+    {
+      "year": "May 2022 — Jun 2022",
+      "title": "Frontend Developer — Hoang Phuc International",
+      "desc": "Built responsive UI components and checkout flows. Improved mobile conversion rate by 15%."
+    },
+    {
+      "year": "Dec 2020 — May 2022",
+      "title": "Software Engineer — GREENFEED GROUP",
+      "desc": "Developed B2B e-commerce and internal CMS. Led migration from monolith to service-oriented architecture."
+    },
+    {
+      "year": "Aug 2020 — Nov 2020",
+      "title": "Frontend Developer — GREENFEED GROUP",
+      "desc": "Implemented dashboard UI and data visualization components. Reduced bundle size by 30% through code splitting."
+    },
+    {
+      "year": "Feb 2020 — Jul 2020",
+      "title": "Frontend Developer — HD Tower (Sun Group)",
+      "desc": "Built corporate website and internal webapp with Vue.js. Ensured cross-browser compatibility and accessibility."
+    },
+    {
+      "year": "Oct 2019 — Jan 2020",
+      "title": "Frontend Developer — Vinmart",
+      "desc": "Developed inventory management UI and reporting dashboards. Collaborated with backend team on REST API design."
+    },
+    {
+      "year": "Jun 2019 — Nov 2019",
+      "title": "Frontend Developer — Vietinbank",
+      "desc": "Built internal banking tools and smart branch interfaces. Focused on security best practices and form validation."
+    }
+  ]
+}

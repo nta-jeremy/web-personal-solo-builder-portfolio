@@ -1,0 +1,208 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCardPattern from './ProjectCardPattern.astro';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+  index?: number;
+}
+
+const { project, index = 0 } = Astro.props;
+const { data, id } = project;
+
+const liveLink = data.liveUrl;
+const repoLink = data.repoUrl;
+const imageSrc = data.image;
+
+const detailUrl = `/projects/${id}/`;
+const pattern = index % 3;
+---
+
+<article class={`project-card${data.featured ? ' featured' : ''}`}>
+  {imageSrc && (
+    <div class="project-image">
+      <div class={`image-placeholder pattern-${pattern}`}>
+        <ProjectCardPattern pattern={pattern} />
+      </div>
+    </div>
+  )}
+
+  <div class="project-content">
+    <h3 class="project-title serif"><a href={detailUrl} class="project-title-link">{data.title}</a></h3>
+    <p class="project-description">{data.description}</p>
+
+    {data.categories && data.categories.length > 0 && (
+      <div class="project-categories">
+        {data.categories.map((cat) => (
+          <span class={`tag${data.featured ? ' accent' : ''}`}>{cat}</span>
+        ))}
+      </div>
+    )}
+
+    {data.tech && data.tech.length > 0 && (
+      <div class="project-tech mono">
+        {data.tech.join(' · ')}
+      </div>
+    )}
+
+    {(liveLink || repoLink) && (
+      <div class="project-links">
+        {liveLink && (
+          <a
+            href={liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link"
+            aria-label="Live site"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </a>
+        )}
+        {repoLink && (
+          <a
+            href={repoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link"
+            aria-label="Repository"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</article>
+
+<style>
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--bg-alt);
+    padding: 24px;
+    transition: border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+  }
+
+  .project-card:hover {
+    border-color: var(--ink);
+  }
+
+  .project-card.featured {
+    border-left: 2px solid var(--accent);
+    padding-left: 22px;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .image-placeholder.pattern-0 {
+    background: radial-gradient(circle at 50% 50%, #c27a5c 0%, #2c1e17 70%);
+  }
+
+  .image-placeholder.pattern-1 {
+    background: linear-gradient(135deg, #4a3d33, #0f0b09);
+  }
+
+  .image-placeholder.pattern-2 {
+    background: linear-gradient(160deg, #3a2620, #6b3a28 60%, #c27a5c);
+  }
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .project-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .project-title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project-title-link:hover {
+    text-decoration: underline;
+  }
+
+  .project-description {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .project-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .project-tech {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .project-link {
+    color: var(--muted);
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+  }
+
+  .project-link:hover {
+    color: var(--ink);
+  }
+
+  .project-link svg {
+    width: 16px;
+    height: 16px;
+  }
+</style>

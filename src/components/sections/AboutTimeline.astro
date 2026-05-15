@@ -1,0 +1,99 @@
+---
+import { t } from '@/i18n/utils';
+
+export interface Props {
+  translations: Record<string, unknown>;
+  timeline: Array<{ year: string; title: string; desc: string }>;
+}
+
+const { translations, timeline } = Astro.props;
+---
+
+<section class="about-timeline">
+  <span class="about-section-label">{t(translations, 'about.timelineLabel')}</span>
+  <div class="about-timeline-list">
+    {timeline.map((item, index) => (
+      <div class="about-timeline-item" data-index={index}>
+        <div class="about-timeline-meta">
+          <span class="about-timeline-year mono">{item.year}</span>
+          <span class="about-timeline-title serif">{item.title}</span>
+        </div>
+        <p class="about-timeline-desc">{item.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .about-timeline {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .about-timeline {
+      margin-bottom: 48px;
+    }
+  }
+  .about-section-label {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .about-timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .about-timeline-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .about-timeline-item:first-child {
+    border-top: none;
+  }
+  .about-timeline-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .about-timeline-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .about-timeline-year {
+    font-size: 11px;
+    color: var(--subtle);
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+  .about-timeline-title {
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .about-timeline-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .about-timeline-item {
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+    }
+    .about-timeline-meta {
+      gap: 4px;
+    }
+    .about-timeline-desc {
+      padding-top: 4px;
+    }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+export interface Props {
+  options: { value: string; label: string }[];
+  filterLabel?: string;
+}
+
+const { options } = Astro.props;
+---
+
+<div class="project-filters" data-filters>
+  {
+    options.map((opt, i) => (
+      <button
+        class={`project-filter-chip${i === 0 ? ' active' : ''}`}
+        data-filter={opt.value}
+        type="button"
+      >
+        {opt.label}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  (function () {
+    const container = document.querySelector('[data-filters]');
+    if (!container) return;
+    const chips = container.querySelectorAll('[data-filter]');
+    const items = document.querySelectorAll('.project-list-item');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const filter = chip.getAttribute('data-filter') || 'all';
+
+        chips.forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        items.forEach((item) => {
+          const catsRaw = item.getAttribute('data-categories');
+          const tagsRaw = item.getAttribute('data-tags');
+          let cats: string[] = [];
+          let tags: string[] = [];
+          try {
+            if (catsRaw) cats = JSON.parse(catsRaw);
+          } catch { /* ignore */ }
+          try {
+            if (tagsRaw) tags = JSON.parse(tagsRaw);
+          } catch { /* ignore */ }
+          const all = [...cats, ...tags];
+          if (filter === 'all' || all.includes(filter)) {
+            (item as HTMLElement).style.display = '';
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  })();
+</script>
+
+<style>
+  .project-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .project-filter-chip {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border-2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    min-height: 44px;
+  }
+  .project-filter-chip:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .project-filter-chip.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+</style>

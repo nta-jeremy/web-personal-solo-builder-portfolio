@@ -1,0 +1,93 @@
+---
+import { t } from '@/i18n/utils';
+
+export interface Props {
+  translations: Record<string, unknown>;
+}
+
+const { translations } = Astro.props;
+---
+
+<section class="about-bio">
+  <span class="about-label">{t(translations, 'about.label')}</span>
+  <div class="about-bio-grid">
+    <div class="about-bio-text">
+      <h1 class="serif about-heading">{t(translations, 'about.heading')}</h1>
+      <p class="about-bio-p">{t(translations, 'about.bio1')}</p>
+      <p class="about-bio-p">{t(translations, 'about.bio2')}</p>
+    </div>
+    <div class="about-avatar" aria-label="Avatar placeholder">
+      <div class="about-avatar-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-bio {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .about-bio {
+      margin-bottom: 48px;
+    }
+  }
+  .about-label {
+    display: block;
+    color: var(--accent);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .about-bio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .about-heading {
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+  }
+  .about-bio-p {
+    font-size: 16px;
+    line-height: 1.72;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  .about-bio-p:last-child {
+    margin-bottom: 0;
+  }
+  .about-avatar {
+    width: 160px;
+    height: 200px;
+    border-radius: 12px;
+    background: linear-gradient(160deg, #d08a65, #6b3a28);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .about-avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(255, 240, 220, 0.2) 0 25%, transparent 28%);
+  }
+  @media (min-width: 768px) {
+    .about-bio-grid {
+      grid-template-columns: 1fr 160px;
+      gap: 48px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-avatar {
+      width: 100%;
+      height: 180px;
+      order: -1;
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+{
+  "timeline": [
+    {
+      "year": "Thg 1 2026 — Hiện tại",
+      "title": "Technical Leader — YODY",
+      "desc": "Dẫn dắt quyết định kỹ thuật và kiến trúc cho hệ thống bán lẻ AI-driven. Thúc đẩy omnichannel và hiện đại hóa nền tảng."
+    },
+    {
+      "year": "Thg 1 2024 — Thg 12 2025",
+      "title": "Software Developer — YODY",
+      "desc": "Xây dựng và duy trì hạ tầng thương mại điện tử phục vụ 1M+ người dùng. Triển khai kiến trúc microservices với Go và Node.js."
+    },
+    {
+      "year": "Thg 4 2023 — Thg 12 2023",
+      "title": "Software Engineer — ScaleUP",
+      "desc": "Phát triển công cụ CRM và vận hành cho hệ sinh thái startup. Cung cấp giải pháp full-stack với React và PostgreSQL."
+    },
+    {
+      "year": "Thg 6 2022 — Thg 4 2023",
+      "title": "Software Engineer — Hoang Phuc International",
+      "desc": "Xây dựng nền tảng thương mại điện tử xử lý 3000+ đơn hàng mỗi ngày. Tối ưu truy vấn cơ sở dữ liệu giảm độ trễ 40%."
+    },
+    {
+      "year": "Thg 5 2022 — Thg 6 2022",
+      "title": "Frontend Developer — Hoang Phuc International",
+      "desc": "Xây dựng UI components và luồng thanh toán responsive. Cải thiện tỷ lệ chuyển đổi mobile 15%."
+    },
+    {
+      "year": "Thg 12 2020 — Thg 5 2022",
+      "title": "Software Engineer — GREENFEED GROUP",
+      "desc": "Phát triển B2B thương mại điện tử và CMS nội bộ. Dẫn dắt di chuyển từ monolith sang service-oriented architecture."
+    },
+    {
+      "year": "Thg 8 2020 — Thg 11 2020",
+      "title": "Frontend Developer — GREENFEED GROUP",
+      "desc": "Triển khai UI dashboard và components trực quan hóa dữ liệu. Giảm bundle size 30% qua code splitting."
+    },
+    {
+      "year": "Thg 2 2020 — Thg 7 2020",
+      "title": "Frontend Developer — HD Tower (Sun Group)",
+      "desc": "Xây dựng website doanh nghiệp và webapp nội bộ với Vue.js. Đảm bảo tương thích đa trình duyệt và accessibility."
+    },
+    {
+      "year": "Thg 10 2019 — Thg 1 2020",
+      "title": "Frontend Developer — Vinmart",
+      "desc": "Phát triển UI quản lý tồn kho và dashboard báo cáo. Hợp tác team backend thiết kế REST API."
+    },
+    {
+      "year": "Thg 6 2019 — Thg 11 2019",
+      "title": "Frontend Developer — Vietinbank",
+      "desc": "Xây dựng công cụ ngân hàng nội bộ và giao diện smart branch. Tập trung bảo mật và form validation."
+    }
+  ]
+}

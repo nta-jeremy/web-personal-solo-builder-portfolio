@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Visual Regression Report</title>
+<style>
+body{font-family:Inter,system-ui,sans-serif;margin:24px;background:#0f0f0f;color:#e5e5e5}
+h1{margin:0 0 8px}h2{margin:32px 0 12px;color:#ccc}p{color:#888;margin:0 0 24px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border:1px solid #333;padding:10px;text-align:left;vertical-align:top}
+th{background:#1a1a1a;color:#fff}
+img{max-width:100%;border-radius:6px;border:1px solid #333}
+tr:hover{background:#1a1a1a}
+.status-ok{color:#4ade80}.status-warn{color:#fbbf24}.status-fail{color:#f87171}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.summary-card{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:16px}
+.summary-card h3{margin:0 0 8px;font-size:14px;color:#888}
+.summary-card .value{font-size:28px;font-weight:600;margin:0}
+</style></head><body>
+<h1>Visual Regression Report</h1>
+<p>Generated: 4/23/2026, 11:59:13 PM</p>
+
+<div class="summary">
+  <div class="summary-card">
+    <h3>Desktop Home Diff</h3>
+    <p class="value" style="color:red">19.88%</p>
+  </div>
+  <div class="summary-card">
+    <h3>Mobile Home Diff</h3>
+    <p class="value" style="color:red">15.85%</p>
+  </div>
+  <div class="summary-card">
+    <h3>Total Comparisons</h3>
+    <p class="value">2</p>
+  </div>
+</div>
+
+<h2>Desktop Comparisons</h2>
+<table>
+  <tr><th>Page</th><th>Dimensions</th><th>Same Size</th><th>Diff Pixels</th><th>Diff %</th><th>Astro Site</th><th>Design Sample</th><th>Diff Overlay</th></tr>
+  
+    <tr>
+      <td>home</td>
+      <td>1440x10980</td>
+      <td><strong style="color:red">No</strong></td>
+      <td>3,143,862</td>
+      <td><strong style="color:red">19.88%</strong></td>
+      <td><img src="aligned-astro-home.png" width="280" /></td>
+      <td><img src="aligned-sample-home.png" width="280" /></td>
+      <td><img src="diff-home.png" width="280" /></td>
+    </tr>
+  
+</table>
+
+<h2>Mobile Comparisons</h2>
+<table>
+  <tr><th>Page</th><th>Dimensions</th><th>Same Size</th><th>Diff Pixels</th><th>Diff %</th><th>Astro Site</th><th>Design Sample</th><th>Diff Overlay</th></tr>
+  
+    <tr>
+      <td>home</td>
+      <td>375x3780</td>
+      <td><strong style="color:red">No</strong></td>
+      <td>224,717</td>
+      <td><strong style="color:red">15.85%</strong></td>
+      <td><img src="aligned-astro-home-mobile.png" width="200" /></td>
+      <td><img src="aligned-sample-home-mobile.png" width="200" /></td>
+      <td><img src="diff-home-mobile.png" width="200" /></td>
+    </tr>
+  
+</table>
+</body></html>

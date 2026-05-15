@@ -1,0 +1,59 @@
+---
+import ContactInfo from './ContactInfo.astro';
+import ConversationUI from '../islands/ConversationUI';
+import { t } from '@/i18n/utils';
+import { SITE_URL, SAME_AS } from '@/config/social-links';
+
+export interface Props {
+  translations: Record<string, unknown>;
+  locale: 'en' | 'vi';
+}
+
+const { translations } = Astro.props;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Jeremy Nguyen',
+  jobTitle: 'Product Engineer / Solo Builder',
+  url: SITE_URL,
+  sameAs: SAME_AS,
+};
+---
+
+<ContactInfo translations={translations} />
+
+<ConversationUI
+  client:load
+  steps={[
+    {
+      message: t(translations, 'conversation.step1.message'),
+      emphasis: t(translations, 'conversation.step1.emphasis'),
+      placeholder: t(translations, 'conversation.step1.placeholder'),
+    },
+    {
+      message: t(translations, 'conversation.step2.message'),
+      placeholder: t(translations, 'conversation.step2.placeholder'),
+    },
+    {
+      message: t(translations, 'conversation.step3.message'),
+      placeholder: t(translations, 'conversation.step3.placeholder'),
+    },
+  ]}
+  sendLabel={t(translations, 'conversation.sendButton')}
+  sendingLabel={t(translations, 'conversation.sendingButton')}
+  successTitle={t(translations, 'conversation.successTitle')}
+  successMsg={t(translations, 'conversation.successMessage')}
+  errorMsg={t(translations, 'conversation.errorMessage')}
+  validation={{
+    name: t(translations, 'conversation.validation.nameRequired'),
+    email: t(translations, 'conversation.validation.emailRequired'),
+    emailInvalid: t(translations, 'conversation.validation.emailInvalid'),
+    topic: t(translations, 'conversation.validation.topicRequired'),
+  }}
+/>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+<style>
+</style>

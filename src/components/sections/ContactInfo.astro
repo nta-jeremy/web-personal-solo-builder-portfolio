@@ -1,0 +1,144 @@
+---
+import { t } from '@/i18n/utils';
+import { EMAIL, SOCIAL_LINKS } from '@/config/social-links';
+
+export interface Props {
+  translations: Record<string, unknown>;
+}
+
+const { translations } = Astro.props;
+
+const email = EMAIL;
+const socials = Object.values(SOCIAL_LINKS);
+const emailEncoded = Buffer.from(email).toString('base64');
+---
+
+<section class="contact-info">
+  <h1 class="serif contact-heading">{t(translations, 'contact.heading')}</h1>
+  <p class="contact-desc">{t(translations, 'contact.subtitle')}</p>
+
+  <div class="contact-methods">
+    <div class="contact-method">
+      <span class="contact-method-label">{t(translations, 'contact.emailLabel')}</span>
+      <a id="email-link" href="#" class="contact-link" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3 7l9 6 9-6"/>
+        </svg>
+        <span id="email-text"></span>
+      </a>
+
+      <script is:inline define:vars={{ emailEncoded }}>
+        const email = atob(emailEncoded);
+        const link = document.getElementById('email-link');
+        const text = document.getElementById('email-text');
+        if (link) {
+          link.href = 'mailto:' + email;
+          link.removeAttribute('id');
+        }
+        if (text) {
+          text.textContent = email;
+          text.removeAttribute('id');
+        }
+      </script>
+    </div>
+
+    <div class="contact-method">
+      <span class="contact-method-label">{t(translations, 'contact.socialLabel')}</span>
+      <div class="contact-socials">
+        {socials.map((s) => (
+          <a href={s.url} class="contact-social" target="_blank" rel="noopener noreferrer" aria-label={s.name}>
+            {s.name === 'GitHub' && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a4 4 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.5.2 2.6.1 2.8a4 4 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/>
+              </svg>
+            )}
+            {s.name === 'LinkedIn' && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            )}
+            {s.name === 'X' && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            )}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-info {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .contact-info {
+      margin-bottom: 48px;
+    }
+  }
+  .contact-heading {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .contact-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 40px;
+    max-width: 440px;
+  }
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .contact-method-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: var(--ink);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.15s;
+  }
+  .contact-link:hover {
+    border-color: var(--accent);
+  }
+  .contact-socials {
+    display: flex;
+    gap: 12px;
+  }
+  .contact-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-2);
+    color: var(--muted);
+    background: var(--bg-alt);
+    transition: all 0.15s;
+  }
+  .contact-social:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(184, 92, 60, 0.08);
+  }
+</style>

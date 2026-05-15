@@ -1,0 +1,172 @@
+{
+  "nav": {
+    "about": "Giới thiệu",
+    "projects": "Dự án",
+    "blog": "Blog",
+    "contact": "Liên hệ"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Tự động"
+  },
+  "home": {
+    "status": "ĐANG ONLINE",
+    "title": "Xin chào, mình là Jeremy.",
+    "subtitle": "Một Product Engineer và solo builder, làm việc trên ranh giới giữa hệ thống phân tán và nhận thức con người. Mình viết, ship sản phẩm, và thỉnh thoảng xuất bản bài luận từ xưởng của mình.",
+    "ctaEssays": "Đọc bài luận",
+    "ctaEssaysDesc": "28 bài về hệ thống & nghề",
+    "ctaWork": "Xem dự án",
+    "ctaWorkDesc": "12 dự án đã ship",
+    "ctaAbout": "Về Jeremy",
+    "ctaAboutDesc": "Tiểu sử, lộ trình, công nghệ",
+    "ctaContact": "Bắt đầu cuộc trò chuyện",
+    "ctaContactDesc": "Luôn chào đón hợp tác",
+    "latestArtifact": "TÁC PHẨM MỚI NHẤT",
+    "latestRead": "Đọc bài",
+    "noArtifact": "Sắp có."
+  },
+  "about": {
+    "title": "Giới thiệu",
+    "label": "KỸ SƯ PHẦN MỀM",
+    "heading": "Xây dựng hệ thống có khả năng mở rộng.",
+    "bio1": "Người yêu sách, kẻ tìm kiếm tri thức, và người đam mê công nghệ. Tôi tin rằng công nghệ là nghệ thuật giải quyết vấn đề.",
+    "bio2": "Tôi chạy bộ để cân bằng căng thẳng cuộc sống và rèn luyện sức bền.",
+    "philosophyLabel": "TRIẾT LÝ",
+    "philosophyQuote": "Mỗi dòng code là một nét vẽ trong bức chân dung lớn hơn về tiến bộ của nhân loại.",
+    "domainsLabel": "LĨNH VỰC KỸ THUẬT",
+    "timelineLabel": "LỘ TRÌNH SỰ NGHIỆP",
+    "timeline": [
+      { "year": "2024", "title": "Product Engineer & Solo Builder", "desc": "Xây dựng các sản phẩm AI-native từ đầu đến cuối và tư vấn kiến trúc hệ thống." },
+      { "year": "2021", "title": "Senior Software Engineer (Fullstack)", "desc": "Ship các hệ thống production xuyên suốt frontend, backend, và hạ tầng quy mô lớn." },
+      { "year": "2019", "title": "Software Engineer (Fullstack)", "desc": "Xây dựng hệ thống dữ liệu thời gian thực và nền tảng API cho sản phẩm giai đoạn đầu." },
+      { "year": "2017", "title": "Junior Developer", "desc": "Làm quen với web stack và công cụ ML inference." }
+    ]
+  },
+  "projects": {
+    "label": "DANH MỤC · KHO LƯU TRỮ 2026",
+    "heading": "Các Tác Phẩm Chọn Lọc",
+    "subtitle": "Bộ sưu tập được chọn lọc từ các dự án đã ship, thử nghiệm và khám phá kỹ thuật.",
+    "featured": "Nổi bật",
+    "explore": "Khám phá chi tiết kỹ thuật",
+    "comingSoon": "Sắp ra mắt",
+    "filterAll": "Tất cả"
+  },
+  "breadcrumb": {
+    "home": "Trang chủ",
+    "blog": "Blog"
+  },
+  "blog": {
+    "title": "Bài Luận & Tác Phẩm",
+    "archiveLabel": "KHO LƯU TRỮ",
+    "heading": "Bài Luận & Tác Phẩm",
+    "subtitle": "Viết về hệ thống, nghề thủ công và triết lý công nghệ.",
+    "backToArchive": "Quay lại kho",
+    "readingTime": "phút đọc",
+    "prevPost": "Bài trước",
+    "nextPost": "Bài tiếp",
+    "draft": "Bản nháp",
+    "searchPlaceholder": "Tìm kiếm bài viết...",
+    "postNavAriaLabel": "Điều hướng bài viết",
+    "authorName": "Được viết bởi Jeremy Nguyen",
+    "authorDesc": "Hệ thống, bài luận, và các thử nghiệm thỉnh thoảng.",
+    "noPosts": "Chưa có bài viết nào."
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "heading": "Bắt Đầu Cuộc Trò Chuyện",
+    "subtitle": "Dù bạn muốn hợp tác, thảo luận ý tưởng, hay chỉ để chào hỏi — hộp thư của mình luôn mở.",
+    "emailLabel": "Email",
+    "socialLabel": "Kết nối",
+    "copyEmail": "Sao chép email",
+    "emailCopied": "Đã sao chép!"
+  },
+  "conversation": {
+    "step1": {
+      "message": "Xin chào. Tôi là Jeremy. Tôi rất vui được nghe về những gì bạn đang xây dựng. Để bắt đầu,",
+      "emphasis": "tên bạn là gì?",
+      "placeholder": "Nhập tên của bạn…"
+    },
+    "step2": {
+      "message": "Rất vui được gặp bạn. Tôi nên sử dụng địa chỉ email nào để liên hệ lại với bạn?",
+      "placeholder": "email@example.com"
+    },
+    "step3": {
+      "message": "Cuối cùng, bạn muốn nói về điều gì? Hãy thoải mái mô tả chi tiết về dự án của bạn.",
+      "placeholder": "Tôi có một ý tưởng về…"
+    },
+    "sendButton": "Gửi cuộc trò chuyện",
+    "sendingButton": "Đang gửi…",
+    "successTitle": "Đã gửi!",
+    "successMessage": "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm.",
+    "errorMessage": "Gửi thất bại. Vui lòng thử lại.",
+    "validation": {
+      "nameRequired": "Vui lòng nhập tên",
+      "emailRequired": "Vui lòng nhập email",
+      "emailInvalid": "Email không hợp lệ",
+      "topicRequired": "Vui lòng nhập nội dung"
+    }
+  },
+  "chat": {
+    "placeholder": "Hỏi bất cứ điều gì về công việc của mình…",
+    "send": "Gửi",
+    "greeting": "Xin chào, mình có thể giúp gì cho bạn?",
+    "thinking": "Đang suy nghĩ...",
+    "error": "Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.",
+    "offline": "Mình đang ngoại tuyến. Để lại tin nhắn và mình sẽ phản hồi sớm."
+  },
+  "footer": {
+    "copyright": "Jeremy Nguyen. Bảo lưu mọi quyền."
+  },
+  "meta": {
+    "siteName": "Jeremy Nguyen",
+    "siteDescription": "Portfolio và blog cá nhân của Jeremy Nguyen. Viết về AI, system design, và những dòng code tôi tin tưởng.",
+    "homeTitle": "Jeremy Nguyen · Kỹ Sư Phần Mềm & Technical Leader · Portfolio",
+    "homeDescription": "Tôi xây dựng hệ thống có khả năng mở rộng. Hơn 7 năm là Software Engineer, từ Frontend Developer đến Technical Leader. Đây là nơi tôi chia sẻ những gì đã học được.",
+    "ogHomeTitle": "Jeremy Nguyen — Kỹ Sư Phần Mềm & Technical Leader · Xây Dựng Hệ Thống Có Khả Năng Mở Rộng",
+    "aboutTitle": "Giới thiệu · Jeremy Nguyen — Kỹ Sư Phần Mềm & Technical Leader",
+    "aboutDescription": "Hơn 7 năm trong ngành: từ Frontend Developer đến Software Engineer đến Technical Leader. Tôi tin vào code được ship.",
+    "ogAboutTitle": "Hành trình của Jeremy — Từ Frontend Developer đến Technical Leader",
+    "projectsTitle": "Các Tác Phẩm Chọn Lọc · Jeremy Nguyen",
+    "projectsDescription": "Những project tôi đã ship: từ hệ thống AI production đến các experiment kỹ thuật. Mỗi dòng code là một nét vẽ.",
+    "ogProjectsTitle": "Các Tác Phẩm Chọn Lọc — Từ AI Production đến Experiments",
+    "blogTitle": "Bài Luận & Tác Phẩm · Jeremy Nguyen",
+    "blogDescription": "Viết về LLM architecture, system design, và triết lý công nghệ. Không phải tutorial copy-paste — mà là suy nghĩ thực sự.",
+    "ogBlogTitle": "Bài Luận & Tác Phẩm — Suy nghĩ về AI và System Design",
+    "contactTitle": "Liên hệ · Jeremy Nguyen — Hợp tác & Trò chuyện",
+    "portfolioTitle": "Portfolio · Jeremy Nguyen — Kỹ Sư Phần Mềm & Technical Leader",
+    "portfolioDescription": "Portfolio truyền thống về công việc của tôi: tiểu sử, lộ trình sự nghiệp, kỹ năng và dự án. Được xây dựng với dữ liệu thực.",
+    "ogPortfolioTitle": "Portfolio — Kỹ Sư Phần Mềm & Technical Leader",
+    "contactDescription": "Muốn hợp tác, thuê tôi làm consultant, hoặc chỉ đơn giản là trò chuyện về công nghệ? Cửa luôn mở.",
+    "ogContactTitle": "Liên hệ — Cửa luôn mở cho những cuộc trò chuyện thú vị",
+    "error404Title": "Không tìm thấy · 404",
+    "error404Description": "Trang này không tồn tại. Nhưng đừng lo, còn nhiều thứ hay ho khác để khám phá."
+  },
+  "mobile": {
+    "navAbout": "Giới thiệu",
+    "navProjects": "Dự án",
+    "navBlog": "Blog",
+    "navContact": "Liên hệ",
+    "menuOpen": "Mở menu",
+    "menuClose": "Đóng menu"
+  },
+  "sidebar": {
+    "name": "Jeremy Nguyen",
+    "title": "Kỹ Sư Phần Mềm / Technical Leader",
+    "settings": "Cài đặt",
+    "support": "Hỗ trợ"
+  },
+  "projectDetail": {
+    "label": "Chi tiết dự án",
+    "techStack": "Công nghệ",
+    "liveSite": "Trang web",
+    "repository": "Mã nguồn",
+    "tags": "Thẻ"
+  },
+  "error404": {
+    "title": "404 — Không tìm thấy trang",
+    "heading": "404",
+    "subtitle": "Trang bạn tìm kiếm không tồn tại hoặc đã được di chuyển.",
+    "cta": "Về trang chủ"
+  }
+}

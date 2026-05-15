@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getTranslations, t } from '@/i18n/utils';
+import ContactPage from '@components/sections/ContactPage.astro';
+
+const locale = Astro.currentLocale || 'vi';
+const translations = getTranslations(locale as 'en' | 'vi');
+---
+
+<Layout title={t(translations, 'meta.contactTitle')} description={t(translations, 'meta.contactDescription')} ogTitle={t(translations, 'meta.ogContactTitle')} image="/og-default.png">
+  <div class="artifact contact-page">
+    <ContactPage translations={translations} locale={locale as 'en' | 'vi'} />
+  </div>
+</Layout>
+
+<style>
+  .contact-page {
+    padding-top: 8px;
+    position: relative;
+  }
+  @media (max-width: 1100px) {
+    :global(.contact-sidebar) {
+      display: none !important;
+    }
+  }
+</style>

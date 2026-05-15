@@ -1,0 +1,144 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, t } from '@/i18n/utils';
+import jeremyData from '@/data/jeremy-vi.json';
+import AboutBio from '@components/sections/AboutBio.astro';
+import AboutTimeline from '@components/sections/AboutTimeline.astro';
+
+const locale = Astro.currentLocale || 'vi';
+const translations = getTranslations(locale as 'en' | 'vi');
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) =>
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nguyễn Tùng Anh (Jeremy Nguyen)',
+  jobTitle: 'Kỹ Sư Phần Mềm | Technical Leader',
+  url: 'https://jeremynguyen.tech',
+};
+---
+
+<Layout
+  title={t(translations, 'meta.portfolioTitle')}
+  description={t(translations, 'meta.portfolioDescription')}
+  ogTitle={t(translations, 'meta.ogPortfolioTitle')}
+  image="/og-default.png"
+>
+  <div class="artifact portfolio-page">
+    <AboutBio translations={translations} />
+
+    <section class="portfolio-section">
+      <span class="portfolio-section-label">{t(translations, 'about.domainsLabel')}</span>
+      <div class="portfolio-domains">
+        {jeremyData.domains.map((domain) => (
+          <span class="portfolio-domain">{domain}</span>
+        ))}
+      </div>
+    </section>
+
+    <AboutTimeline translations={translations} timeline={jeremyData.career.timeline} />
+
+    <section class="portfolio-section">
+      <span class="portfolio-section-label">{t(translations, 'projects.label')}</span>
+      <div class="portfolio-project-list">
+        {projects.map((project) => (
+          <div class="portfolio-project-item">
+            <a href={`/projects/${project.id}/`} class="portfolio-project-link">
+              <h3 class="portfolio-project-title">{project.data.title}</h3>
+            </a>
+            <p class="portfolio-project-desc">{project.data.description}</p>
+            <div class="portfolio-project-tech">
+              {project.data.tech.map((tech) => (
+                <span class="portfolio-tech-tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+</Layout>
+
+<style>
+  .portfolio-page {
+    padding-top: 8px;
+  }
+  .portfolio-section {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .portfolio-section {
+      margin-bottom: 48px;
+    }
+  }
+  .portfolio-section-label {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .portfolio-domains {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .portfolio-domain {
+    font-size: 13.5px;
+    color: var(--ink);
+    background: var(--surface);
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .portfolio-project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .portfolio-project-item {
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .portfolio-project-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .portfolio-project-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .portfolio-project-title {
+    font-size: 19px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .portfolio-project-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+  .portfolio-project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .portfolio-tech-tag {
+    font-size: 11px;
+    color: var(--subtle);
+    background: var(--surface);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>

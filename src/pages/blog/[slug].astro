@@ -1,0 +1,268 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@layouts/BaseLayout.astro';
+import { getTranslations, t } from '@/i18n/utils';
+import JsonLd from '@components/seo/JsonLd.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => {
+    return !data.draft && !data.hidden && data.locale === 'vi';
+  });
+
+  return posts.map((post) => {
+    const slug = post.id.replace(/^vi\//, '');
+    return { params: { slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { data } = post;
+
+const locale = data.locale as 'en' | 'vi';
+const translations = getTranslations(locale);
+
+const allPosts = await getCollection('blog', ({ data: d }) => {
+  return !d.draft && !d.hidden && d.locale === locale;
+});
+
+allPosts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
+const slugify = (id: string) => id.replace(/^(en|vi)\//, '');
+
+const dateFmt = new Date(data.pubDate).toLocaleDateString(
+  locale === 'vi' ? 'vi-VN' : 'en-US',
+  { year: 'numeric', month: 'short', day: 'numeric' }
+);
+
+const readingTimeLabel = data.readingTime
+  ? `${data.readingTime} ${t(translations, 'blog.readingTime')}`
+  : '';
+
+const archivePath = locale === 'en' ? '/en/blog/' : '/blog/';
+const site = 'https://jeremytech.io.vn';
+const canonical = `${site}${archivePath}${slugify(post.id)}/`;
+---
+
+<Layout
+  title={`${data.title} · ${t(translations, 'blog.title')} · Jeremy Nguyen`}
+  description={data.description}
+  ogTitle={data.title}
+  ogDescription={data.description}
+  image={data.image || '/og-default.png'}
+  type="article"
+  canonicalUrl={data.canonicalUrl}
+  publishedDate={new Date(data.pubDate).toISOString()}
+  modifiedDate={data.updatedDate ? new Date(data.updatedDate).toISOString() : new Date(data.pubDate).toISOString()}
+  tags={data.tags}
+>
+  <JsonLd
+    schema="article"
+    data={{
+      headline: data.title,
+      description: data.description,
+      author: 'Jeremy Nguyen',
+      datePublished: new Date(data.pubDate).toISOString(),
+      dateModified: data.updatedDate
+        ? new Date(data.updatedDate).toISOString()
+        : new Date(data.pubDate).toISOString(),
+      url: canonical,
+    }}
+  />
+  <JsonLd
+    schema="breadcrumb"
+    breadcrumbs={[
+      { name: t(translations, 'breadcrumb.home'), item: 'https://jeremytech.io.vn/' },
+      { name: t(translations, 'breadcrumb.blog'), item: `https://jeremytech.io.vn${archivePath}` },
+      { name: data.title, item: canonical },
+    ]}
+  />
+
+  <article class="artifact blog-post">
+    <a href={archivePath} class="back-link">
+      ← {t(translations, 'blog.backToArchive')}
+    </a>
+
+    <div class="post-meta">
+      <span class="tag accent">{data.category}</span>
+      <span class="meta-date mono">
+        {dateFmt.toUpperCase()}
+        {readingTimeLabel && ` · ${readingTimeLabel}`}
+      </span>
+    </div>
+
+    <h1 class="post-title serif">{data.title}</h1>
+
+    <div class="post-body">
+      <Content />
+    </div>
+
+    <nav class="post-nav" aria-label={t(translations, 'blog.postNavAriaLabel')}>
+      {prevPost && (
+        <a href={`${archivePath}${slugify(prevPost.id)}`} class="nav-link nav-prev">
+          <span class="nav-label">{t(translations, 'blog.prevPost')}</span>
+          <span class="nav-title serif">{prevPost.data.title}</span>
+        </a>
+      )}
+      {nextPost && (
+        <a href={`${archivePath}${slugify(nextPost.id)}`} class="nav-link nav-next">
+          <span class="nav-label">{t(translations, 'blog.nextPost')}</span>
+          <span class="nav-title serif">{nextPost.data.title}</span>
+        </a>
+      )}
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    padding-top: 8px;
+    max-width: 660px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--ink);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .meta-date {
+    font-size: 11px;
+    color: var(--subtle);
+    letter-spacing: 0.1em;
+  }
+
+  .post-title {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+  }
+
+  @media (min-width: 768px) {
+    .post-title {
+      font-size: 52px;
+    }
+  }
+
+  .post-body {
+    font-size: 16px;
+    line-height: 1.72;
+    color: var(--ink-2);
+  }
+
+  @media (min-width: 768px) {
+    .post-body {
+      font-size: 18px;
+    }
+  }
+
+  .post-body :global(p) {
+    margin: 0 0 18px;
+  }
+
+  .post-body :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 20px;
+    margin: 22px 0;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+
+  .post-body :global(h2) {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 36px 0 14px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  @media (min-width: 768px) {
+    .post-body :global(h2) {
+      font-size: 30px;
+    }
+  }
+
+  .post-nav {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .post-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  .nav-next {
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .nav-next {
+      text-align: right;
+    }
+  }
+
+  .nav-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    font-weight: 600;
+  }
+
+  .nav-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 768px) {
+    .nav-title {
+      font-size: 18px;
+    }
+  }
+</style>

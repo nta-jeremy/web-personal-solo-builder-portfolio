@@ -1,0 +1,76 @@
+---
+import LanguageToggle from '@components/islands/LanguageToggle';
+import ThemeToggle from '@components/islands/ThemeToggle';
+import { getTranslations } from '@/i18n/utils';
+
+const { pathname } = Astro.url;
+const locale = pathname.startsWith('/en') ? 'en' : 'vi';
+const t = getTranslations(locale);
+
+const navItems = [
+  { href: '/about', label: t.nav.about, id: 'about' },
+  { href: '/projects', label: t.nav.projects, id: 'projects' },
+  { href: '/blog', label: t.nav.blog, id: 'blog' },
+  { href: '/contact', label: t.nav.contact, id: 'contact' },
+];
+
+function isActive(href: string) {
+  const normalized = pathname.replace(/^\/en/, '') || '/';
+  if (href === '/about') {
+    return normalized === '/' || normalized === '/about' || normalized.startsWith('/about');
+  }
+  return normalized === href || normalized.startsWith(href + '/');
+}
+---
+
+<aside class="sidebar hidden md:flex">
+  <a href="/" class="side-head" style="text-decoration: none; color: inherit;">
+    <img src="/logo/logo_2.svg" alt="" class="side-logo light" width="42" height="42" />
+    <img src="/logo/logo_3.svg" alt="" class="side-logo dark" width="42" height="42" />
+    <div>
+      <div class="side-name">Jeremy Nguyen</div>
+      <div class="side-title">Product Engineer / Solo Builder</div>
+    </div>
+  </a>
+
+  <nav class="side-nav">
+    {navItems.map(item => (
+      <a
+        href={item.href}
+        class={`side-item ${isActive(item.href) ? 'active' : ''}`}
+        data-nav-id={item.id}
+      >
+        {item.id === 'about' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="8" r="3.5"/>
+            <path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>
+          </svg>
+        )}
+        {item.id === 'projects' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v4M12 17v4M3 12h4M17 12h4M12 12l-2.5 4.5L14 14l-2-2z" fill="currentColor" stroke="none"/>
+          </svg>
+        )}
+        {item.id === 'blog' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M4 4h12a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/>
+            <path d="M4 17a3 3 0 0 1 3-3h12"/>
+          </svg>
+        )}
+        {item.id === 'contact' && (
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        )}
+        <span>{item.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="side-foot">
+    <LanguageToggle client:idle />
+    <ThemeToggle client:idle />
+  </div>
+</aside>

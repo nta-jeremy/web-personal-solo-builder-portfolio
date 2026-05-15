@@ -1,0 +1,19 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title = 'Jeremy' } = Astro.props;
+---
+
+<div class="mtop md:hidden">
+  <button class="p-2 -ml-2 flex items-center justify-center" style="min-width: 44px; min-height: 44px;" aria-label="Open menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </svg>
+  </button>
+  <div class="mtop-title">{title}</div>
+  <div class="flex items-center gap-1 text-accent text-xs font-semibold">
+    <span class="font-serif">文A</span>
+  </div>
+</div>

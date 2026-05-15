@@ -1,0 +1,91 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getTranslations, t } from '@/i18n/utils';
+import JsonLd from '@components/seo/JsonLd.astro';
+import BlogList from '@components/sections/BlogList.astro';
+import PagefindSearch from '@components/ui/PagefindSearch.astro';
+
+const locale = Astro.currentLocale || 'en';
+const translations = getTranslations(locale as 'en' | 'vi');
+const pageTitle = t(translations, 'blog.title');
+---
+
+<Layout title={pageTitle} description={t(translations, 'meta.blogDescription')} ogTitle={t(translations, 'meta.ogBlogTitle')} image="/og-default.png">
+  <JsonLd
+    schema="webpage"
+    data={{
+      name: pageTitle,
+      url: `https://jeremytech.io.vn${locale === 'en' ? '/en/blog/' : '/blog/'}`,
+    }}
+  />
+  <JsonLd
+    schema="breadcrumb"
+    breadcrumbs={[
+      { name: t(translations, 'breadcrumb.home'), item: 'https://jeremytech.io.vn/' },
+      { name: pageTitle, item: 'https://jeremytech.io.vn/en/blog/' },
+    ]}
+  />
+
+  <div class="artifact blog-archive">
+    <div class="archive-header">
+      <span class="archive-label">{t(translations, 'blog.archiveLabel')}</span>
+      <h1 class="archive-heading serif" set:html={t(translations, 'blog.heading')} />
+      <p class="archive-subtitle">
+        {t(translations, 'blog.subtitle')}
+      </p>
+    </div>
+
+    <PagefindSearch locale={locale as 'en' | 'vi'} />
+
+    <BlogList locale={locale as 'en' | 'vi'} />
+  </div>
+</Layout>
+
+<style>
+  .blog-archive {
+    padding-top: 8px;
+  }
+
+  .archive-header {
+    margin-bottom: 40px;
+  }
+
+  .archive-label {
+    display: block;
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .archive-heading {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+  }
+
+  @media (min-width: 768px) {
+    .archive-heading {
+      font-size: 52px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .archive-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    .archive-subtitle {
+      font-size: 16px;
+    }
+  }
+</style>

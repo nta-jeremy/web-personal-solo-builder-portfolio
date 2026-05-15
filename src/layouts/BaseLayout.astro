@@ -1,0 +1,146 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import globalCss from '@/styles/global.css?inline';
+import BaseHead from '@components/seo/BaseHead.astro';
+import Sidebar from '@components/ui/Sidebar.astro';
+import ChatBar from '@components/ui/ChatBar.astro';
+import MobileHeader from '@components/islands/MobileHeader';
+import MobileNav from '@components/ui/MobileNav.astro';
+import MobileChat from '@components/islands/MobileChat';
+import ScrollToTop from '@components/ui/ScrollToTop.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImageAlt?: string;
+  locale?: string;
+  publishedDate?: string;
+  modifiedDate?: string;
+  tags?: string[];
+}
+
+const {
+  title,
+  description = 'Personal portfolio of Jeremy Nguyen',
+  image,
+  type,
+  noindex,
+  canonicalUrl,
+  ogTitle,
+  ogDescription,
+  ogImageAlt,
+  locale,
+  publishedDate,
+  modifiedDate,
+  tags,
+} = Astro.props;
+
+const { pathname } = Astro.url;
+const isEn = pathname.startsWith('/en');
+const lang = isEn ? 'en' : 'vi';
+const site = 'https://jeremytech.io.vn';
+const canonical = `${site}${pathname}`;
+const canonicalVi = `${site}${pathname.replace(/^\/en/, '') || '/'}`;
+const canonicalEn = `${site}${getRelativeLocaleUrl('en', pathname.replace(/^\/en/, '') || '/')}`;
+
+const hreflang = [
+  { lang: 'vi', url: canonicalVi },
+  { lang: 'en', url: canonicalEn },
+  { lang: 'x-default', url: canonicalVi },
+];
+---
+
+<!doctype html>
+<html lang={lang} transition:animate="none">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      canonicalUrl={canonicalUrl || canonical}
+      hreflang={hreflang}
+      noindex={noindex}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      ogImageAlt={ogImageAlt}
+      locale={locale || (isEn ? 'en_US' : 'vi_VN')}
+      publishedDate={publishedDate}
+      modifiedDate={modifiedDate}
+      tags={tags}
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style set:html={globalCss}></style>
+
+    <!-- FOUC prevention: apply theme before first paint -->
+    <script is:inline>
+      (function() {
+        var theme = localStorage.getItem('theme') || 'system';
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var resolved = theme === 'dark' || (theme === 'system' && prefersDark) ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', resolved);
+
+        window.theme = {
+          get: function() { return localStorage.getItem('theme') || 'system'; },
+          set: function(t) {
+            localStorage.setItem('theme', t);
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var resolved = t === 'dark' || (t === 'system' && prefersDark) ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', resolved);
+            window.theme._listeners.forEach(function(fn) { fn(t); });
+          },
+          listen: function(fn) { window.theme._listeners.push(fn); },
+          _listeners: []
+        };
+      })();
+    </script>
+
+    <!-- Re-apply theme after ClientRouter swaps -->
+    <script is:inline>
+      document.addEventListener('astro:after-swap', function() {
+        var theme = localStorage.getItem('theme') || 'system';
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var resolved = theme === 'dark' || (theme === 'system' && prefersDark) ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', resolved);
+      });
+    </script>
+
+    <ClientRouter />
+  </head>
+  <body>
+    <!-- Desktop + Mobile unified frame -->
+    <div class="frame">
+      <Sidebar />
+
+      <div class="main">
+        <!-- Mobile top bar (hidden on desktop) -->
+        <MobileHeader client:idle />
+
+        <!-- Scrollable main content -->
+        <main class="main-scroll">
+          <slot />
+        </main>
+
+        <!-- Desktop chatbar (hidden on mobile) -->
+        <div class="hidden md:block">
+          <ChatBar locale={lang} />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile overlays (outside frame so they position fixed correctly) -->
+    <div class="md:hidden">
+      <MobileChat client:load locale={lang} />
+      <MobileNav />
+    </div>
+
+    <ScrollToTop />
+  </body>
+</html>

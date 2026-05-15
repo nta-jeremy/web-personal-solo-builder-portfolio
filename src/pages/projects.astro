@@ -1,0 +1,198 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { getTranslations, t } from '@/i18n/utils';
+import ProjectFilter from '@components/ui/ProjectFilter.astro';
+
+const locale = Astro.currentLocale || 'vi';
+const translations = getTranslations(locale as 'en' | 'vi');
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+
+const visibleProjects = projects.filter((p) => p.data.status === 'published');
+
+const allCategories = Array.from(
+  new Set(visibleProjects.flatMap((p) => p.data.categories || []))
+).sort();
+const allTags = Array.from(
+  new Set(visibleProjects.flatMap((p) => p.data.tags || []))
+).sort();
+
+const seen = new Set(['all']);
+const filterOptions: { value: string; label: string }[] = [
+  { value: 'all', label: t(translations, 'projects.filterAll') },
+];
+allCategories.forEach((c) => {
+  if (!seen.has(c)) {
+    seen.add(c);
+    filterOptions.push({ value: c, label: c });
+  }
+});
+allTags.forEach((tag) => {
+  if (!seen.has(tag)) {
+    seen.add(tag);
+    filterOptions.push({ value: tag, label: tag });
+  }
+});
+---
+
+<Layout
+  title={t(translations, 'meta.projectsTitle')}
+  description={t(translations, 'meta.projectsDescription')}
+  ogTitle={t(translations, 'meta.ogProjectsTitle')}
+  image="/og-default.png"
+>
+  <div class="artifact">
+    <div
+      style="font-size: 10.5px; color: var(--subtle); letter-spacing: 0.18em; font-weight: 600; margin-bottom: 12px; text-transform: uppercase;"
+    >
+      {t(translations, 'projects.label')}
+    </div>
+
+    <h1
+      class="serif"
+      style="font-size: clamp(36px, 4.5vw, 56px); font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 14px;"
+    >
+      {t(translations, 'projects.heading')}
+    </h1>
+
+    <p
+      style="font-size: 16px; color: var(--muted); line-height: 1.65; margin: 0 0 32px; max-width: 540px;"
+    >
+      {t(translations, 'projects.subtitle')}
+    </p>
+
+    {visibleProjects.length > 0 && <ProjectFilter options={filterOptions} />}
+
+    {visibleProjects.length === 0 ? (
+      <div class="empty-state" style="text-align: center; padding: 64px 0; color: var(--muted);">
+        <p style="font-size: 18px; margin: 0;">{t(translations, 'projects.comingSoon')}</p>
+      </div>
+    ) : (
+      <div class="project-list">
+        {
+          visibleProjects.map((project, index) => (
+            <div
+              class={`project-list-item${project.data.featured ? ' featured' : ''}`}
+              data-index={index}
+              data-categories={JSON.stringify(project.data.categories || [])}
+              data-tags={JSON.stringify(project.data.tags || [])}
+            >
+              {project.data.featured && (
+                <div class="project-list-image">
+                  <div class="project-image-placeholder">
+                    <svg width="100%" height="100%" class="project-image-svg">
+                      <defs>
+                        <pattern id={`pp-vi-${index}`} width="22" height="22" patternUnits="userSpaceOnUse">
+                          <circle cx="11" cy="11" r="0.6" fill="#f4d4b5" />
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill={`url(#pp-vi-${index})`} />
+                      <g stroke="#f4d4b5" stroke-width="0.4" fill="none" opacity="0.5">
+                        <path d="M20 20 L200 120 M20 120 L200 20 M100 20 L100 120 M20 70 L200 70" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              )}
+              <div class="project-list-content">
+                {project.data.categories && project.data.categories.length > 0 && (
+                  <div style="display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;">
+                    {project.data.categories.map((cat) => (
+                      <span class="tag">{cat}</span>
+                    ))}
+                  </div>
+                )}
+                <a href={`/projects/${project.id}/`} style="text-decoration: none; color: inherit;">
+                  <h2
+                    class="serif"
+                    style="font-size: clamp(22px, 3vw, 28px); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 10px;"
+                  >
+                    {project.data.title}
+                  </h2>
+                </a>
+                <p
+                  style="font-size: 14.5px; color: var(--muted); line-height: 1.65; margin: 0 0 12px;"
+                >
+                  {project.data.description}
+                </p>
+                {project.data.featured && (
+                  <a
+                    href={`/projects/${project.id}/`}
+                    style="font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; text-transform: uppercase; min-height: 44px;"
+                  >
+                    {t(translations, 'projects.explore')}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      width="14"
+                      height="14"
+                    >
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .project-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .project-list-item {
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .project-list-item:first-child {
+    border-top: 1px solid var(--border);
+  }
+  .project-list-item.featured {
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+  }
+  .project-list-image {
+    width: 220px;
+    height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .project-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #3a2620, #6b3a28 60%, #c27a5c);
+    position: relative;
+  }
+  .project-image-svg {
+    position: absolute;
+    inset: 0;
+  }
+  @media (max-width: 767px) {
+    .project-list-item.featured {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .project-list-image {
+      width: 100%;
+      height: 160px;
+    }
+  }
+</style>

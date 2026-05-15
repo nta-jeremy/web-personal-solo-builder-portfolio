@@ -1,0 +1,32 @@
+/* Design tokens — warm sand palette */
+:root {
+  --bg: #f4f1ea;
+  --bg-alt: #fbf9f3;
+  --surface: #ffffff;
+  --sand: #eae6d8;
+  --ink: #1a1815;
+  --ink-2: #3d3b35;
+  --muted: #6b6860;
+  --subtle: #9c988e;
+  --accent: #a64e30;
+  --accent-soft: #d17a58;
+  --border: #ebe7dc;
+  --border-2: #ddd7c7;
+  --ring: rgba(184, 92, 60, 0.22);
+}
+
+[data-theme="dark"] {
+  --bg: #161412;
+  --bg-alt: #1e1c19;
+  --surface: #242220;
+  --sand: #2e2b27;
+  --ink: #f3eee3;
+  --ink-2: #d8d2c4;
+  --muted: #9a9589;
+  --subtle: #706c62;
+  --accent: #d17a58;
+  --accent-soft: #e09678;
+  --border: #2c2925;
+  --border-2: #3a362f;
+  --ring: rgba(209, 122, 88, 0.28);
+}

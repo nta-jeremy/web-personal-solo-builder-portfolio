@@ -1,0 +1,172 @@
+---
+import Layout from '@layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import JsonLd from '@components/seo/JsonLd.astro';
+import { getTranslations, t } from '@/i18n/utils';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const locale = Astro.currentLocale || 'vi';
+const translations = getTranslations(locale as 'en' | 'vi');
+
+const site = 'https://jeremytech.io.vn';
+const canonical = `${site}/projects/${project.id}/`;
+
+const breadcrumbs = [
+  { name: t(translations, 'nav.projects'), item: `${site}/projects/` },
+  { name: project.data.title, item: canonical },
+];
+---
+
+<Layout
+  title={`${project.data.title} · ${t(translations, 'projects.heading')} · Jeremy Nguyen`}
+  description={project.data.description}
+  ogTitle={project.data.title}
+  ogDescription={project.data.description}
+  image={project.data.image || '/og-default.png'}
+>
+  <JsonLd schema="breadcrumb" breadcrumbs={breadcrumbs} />
+
+  <div class="artifact">
+    <div style="font-size: 10.5px; color: var(--subtle); letter-spacing: 0.18em; font-weight: 600; margin-bottom: 12px; text-transform: uppercase;">
+      {t(translations, 'projectDetail.label')}
+    </div>
+
+    <h1
+      class="serif"
+      style="font-size: clamp(36px, 4.5vw, 56px); font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 14px;"
+    >
+      {project.data.title}
+    </h1>
+
+    <p
+      style="font-size: 16px; color: var(--muted); line-height: 1.65; margin: 0 0 32px; max-width: 640px;"
+    >
+      {project.data.description}
+    </p>
+
+    {project.data.image && (
+      <div class="project-hero-image">
+        <img src={project.data.image} alt={project.data.title} loading="eager" />
+      </div>
+    )}
+
+    {project.data.tech && project.data.tech.length > 0 && (
+      <div class="project-tech-stack" style="margin: 24px 0;">
+        <div style="font-size: 11px; color: var(--subtle); letter-spacing: 0.12em; font-weight: 600; text-transform: uppercase; margin-bottom: 10px;">
+          {t(translations, 'projectDetail.techStack')}
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          {project.data.tech.map((tech) => (
+            <span class="tag">{tech}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {project.data.tags && project.data.tags.length > 0 && (
+      <div class="project-tags" style="margin: 16px 0;">
+        <div style="font-size: 11px; color: var(--subtle); letter-spacing: 0.12em; font-weight: 600; text-transform: uppercase; margin-bottom: 10px;">
+          {t(translations, 'projectDetail.tags')}
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          {project.data.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="project-body" style="margin-top: 32px;">
+      <Content />
+    </div>
+
+    <div class="project-links" style="margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; gap: 16px; flex-wrap: wrap;">
+      {project.data.liveUrl && (
+        <a
+          href={project.data.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-cta"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          {t(translations, 'projectDetail.liveSite')}
+        </a>
+      )}
+      {project.data.repoUrl && (
+        <a
+          href={project.data.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-cta secondary"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          {t(translations, 'projectDetail.repository')}
+        </a>
+      )}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .project-hero-image {
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: var(--bg-alt);
+  }
+  .project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .project-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .project-body :global(p) {
+    margin: 0 0 16px;
+  }
+  .project-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid var(--ink);
+    transition: all 0.15s;
+    min-height: 44px;
+  }
+  .project-cta:hover {
+    opacity: 0.85;
+  }
+  .project-cta.secondary {
+    background: transparent;
+    color: var(--ink);
+  }
+  .project-cta.secondary:hover {
+    background: var(--bg-alt);
+  }
+</style>

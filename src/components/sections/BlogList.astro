@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import { getTranslations, t } from '@/i18n/utils';
+import BlogCard from '@components/ui/BlogCard.astro';
+
+export interface Props {
+  locale: 'en' | 'vi';
+}
+
+const { locale } = Astro.props;
+const translations = getTranslations(locale);
+
+const posts = await getCollection('blog', ({ data }) => {
+  return !data.draft && !data.hidden && data.locale === locale;
+});
+
+posts.sort((a, b) => {
+  return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+});
+---
+
+<div class="blog-list">
+  {posts.length === 0 && (
+    <p class="empty-state">{t(translations, 'blog.noPosts')}</p>
+  )}
+  {posts.map((post) => (
+    <BlogCard post={post} />
+  ))}
+</div>
+
+<style>
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .empty-state {
+    color: var(--muted);
+    font-size: 14px;
+    padding: 24px 0;
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+import { t } from '@/i18n/utils';
+
+export interface Props {
+  translations: Record<string, unknown>;
+}
+
+const { translations } = Astro.props;
+---
+
+<section class="about-philosophy">
+  <span class="about-section-label">{t(translations, 'about.philosophyLabel')}</span>
+  <blockquote class="about-quote">
+    <p class="serif">{t(translations, 'about.philosophyQuote')}</p>
+  </blockquote>
+</section>
+
+<style>
+  .about-philosophy {
+    margin-bottom: 32px;
+  }
+  @media (min-width: 768px) {
+    .about-philosophy {
+      margin-bottom: 48px;
+    }
+  }
+  .about-section-label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--subtle);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .about-quote {
+    margin: 0;
+    padding: 24px 28px;
+    border-left: 2px solid var(--accent);
+    background: var(--bg-alt);
+    border-radius: 0 10px 10px 0;
+  }
+  .about-quote p {
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--ink);
+  }
+</style>

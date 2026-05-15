@@ -1,0 +1,231 @@
+{
+  "personal": {
+    "fullName": "Nguyễn Tùng Anh",
+    "displayName": "Jeremy Nguyen",
+    "headline": "Kỹ Sư Phần Mềm | Technical Leader",
+    "location": "Việt Nam",
+    "email": "tunganh252@gmail.com",
+    "linkedin": "https://linkedin.com/in/jeremynguyen252",
+    "github": "https://github.com/jeremynguyen252",
+    "website": "https://jeremynguyen.tech"
+  },
+  "bio": {
+    "vi": "Người yêu sách, kẻ tìm kiếm tri thức, và người đam mê công nghệ. Tôi tin rằng công nghệ là nghệ thuật giải quyết vấn đề. Tôi chạy bộ để cân bằng căng thẳng cuộc sống và rèn luyện sức bền.",
+    "en": "Book lover, knowledge seeker, and tech enthusiast. I believe technology is the art of problem-solving. I run to balance the stresses of life and to sharpen my endurance."
+  },
+  "philosophy": {
+    "vi": "Công nghệ là nghệ thuật giải quyết vấn đề. Sự đơn giản có khả năng mở rộng. Hệ thống phức tạp thất bại ở các điểm nối.",
+    "en": "Technology is the art of problem-solving. Simplicity scales. Complex systems fail at their seams."
+  },
+  "education": [
+    {
+      "institution": "Đại học Công nghệ - ĐHQGHN",
+      "degree": "Cử nhân Công nghệ Thông tin",
+      "period": "2015 — 2019"
+    }
+  ],
+  "career": {
+    "timeline": [
+      {
+        "year": "Thg 1 2026 — Hiện tại",
+        "title": "Technical Leader — YODY",
+        "desc": "Dẫn dắt quyết định kỹ thuật và kiến trúc cho hệ thống bán lẻ AI-driven. Thúc đẩy omnichannel và hiện đại hóa nền tảng."
+      },
+      {
+        "year": "Thg 1 2024 — Thg 12 2025",
+        "title": "Software Developer — YODY",
+        "desc": "Xây dựng và duy trì hạ tầng thương mại điện tử phục vụ 1M+ người dùng. Triển khai kiến trúc microservices với Go và Node.js."
+      },
+      {
+        "year": "Thg 4 2023 — Thg 12 2023",
+        "title": "Software Engineer — ScaleUP",
+        "desc": "Phát triển công cụ CRM và vận hành cho hệ sinh thái startup. Cung cấp giải pháp full-stack với React và PostgreSQL."
+      },
+      {
+        "year": "Thg 6 2022 — Thg 4 2023",
+        "title": "Software Engineer — Hoang Phuc International",
+        "desc": "Xây dựng nền tảng thương mại điện tử xử lý 3000+ đơn hàng mỗi ngày. Tối ưu truy vấn cơ sở dữ liệu giảm độ trễ 40%."
+      },
+      {
+        "year": "Thg 5 2022 — Thg 6 2022",
+        "title": "Frontend Developer — Hoang Phuc International",
+        "desc": "Xây dựng UI components và luồng thanh toán responsive. Cải thiện tỷ lệ chuyển đổi mobile 15%."
+      },
+      {
+        "year": "Thg 12 2020 — Thg 5 2022",
+        "title": "Software Engineer — GREENFEED GROUP",
+        "desc": "Phát triển B2B thương mại điện tử và CMS nội bộ. Dẫn dắt di chuyển từ monolith sang service-oriented architecture."
+      },
+      {
+        "year": "Thg 8 2020 — Thg 11 2020",
+        "title": "Frontend Developer — GREENFEED GROUP",
+        "desc": "Triển khai UI dashboard và components trực quan hóa dữ liệu. Giảm bundle size 30% qua code splitting."
+      },
+      {
+        "year": "Thg 2 2020 — Thg 7 2020",
+        "title": "Frontend Developer — HD Tower (Sun Group)",
+        "desc": "Xây dựng website doanh nghiệp và webapp nội bộ với Vue.js. Đảm bảo tương thích đa trình duyệt và accessibility."
+      },
+      {
+        "year": "Thg 10 2019 — Thg 1 2020",
+        "title": "Frontend Developer — Vinmart",
+        "desc": "Phát triển UI quản lý tồn kho và dashboard báo cáo. Hợp tác team backend thiết kế REST API."
+      },
+      {
+        "year": "Thg 6 2019 — Thg 11 2019",
+        "title": "Frontend Developer — Vietinbank",
+        "desc": "Xây dựng công cụ ngân hàng nội bộ và giao diện smart branch. Tập trung bảo mật và form validation."
+      }
+    ]
+  },
+  "skills": {
+    "frontend": ["React", "Vue.js", "Astro", "TypeScript", "Tailwind CSS", "Next.js"],
+    "backend": ["Node.js", "Go", "Python", "FastAPI", "Express", "gRPC"],
+    "database": ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Elasticsearch", "Kafka"],
+    "cloud": ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD", "GitHub Actions"],
+    "other": ["System Design", "Microservices", "GraphQL", "REST API", "Agile", "Technical Leadership"]
+  },
+  "projects": [
+    {
+      "title": "Omnichannel Enabler",
+      "company": "YODY",
+      "period": "2024 — 2026",
+      "description": "Nền tảng bán lẻ thống nhất kết nối online và offline. Phục vụ 1M+ khách hàng với đồng bộ tồn kho real-time.",
+      "tech": ["Go", "Node.js", "React", "PostgreSQL", "Kafka", "Redis", "AWS"],
+      "metrics": "1M+ users, 3000+ orders/day, 50% cost reduction",
+      "liveUrl": "https://yody.vn",
+      "featured": true
+    },
+    {
+      "title": "Hoang Phuc Ecommerce",
+      "company": "Hoang Phuc International",
+      "period": "2022 — 2023",
+      "description": "Nền tảng thương mại điện tử đầy đủ tính năng với CMS tùy chỉnh, tích hợp thanh toán và đa ngôn ngữ.",
+      "tech": ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+      "metrics": "3000+ orders/day, 40% latency reduction",
+      "liveUrl": "https://hoang-phuc.com",
+      "featured": true
+    },
+    {
+      "title": "GREENFEED Ecommerce",
+      "company": "GREENFEED GROUP",
+      "period": "2020 — 2022",
+      "description": "B2B thương mại điện tử nông nghiệp với quy tắc định giá phức tạp và luồng đặt hàng số lượng lớn.",
+      "tech": ["Vue.js", "Node.js", "MySQL", "Elasticsearch", "AWS"],
+      "metrics": "B2B bulk orders, 30% bundle size reduction",
+      "liveUrl": "",
+      "featured": true
+    },
+    {
+      "title": "CRM System",
+      "company": "ScaleUP",
+      "period": "2023",
+      "description": "Công cụ quản lý quan hệ khách hàng cho hệ sinh thái startup với pipeline tracking và automated outreach.",
+      "tech": ["React", "PostgreSQL", "Node.js", "Redis"],
+      "metrics": "Pipeline automation, outreach tracking",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "Click Operation",
+      "company": "YODY",
+      "period": "2024 — 2025",
+      "description": "Dashboard vận hành nội bộ quản lý chiến dịch và phân tích click-through.",
+      "tech": ["React", "Go", "ClickHouse", "Kafka"],
+      "metrics": "Real-time analytics, campaign automation",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "Passport SSO",
+      "company": "YODY",
+      "period": "2024 — 2025",
+      "description": "Dịch vụ xác thực single sign-on cho tất cả ứng dụng nội bộ và khách hàng của YODY.",
+      "tech": ["Node.js", "Redis", "PostgreSQL", "OAuth2", "JWT"],
+      "metrics": "Unified auth, 99.9% uptime",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "CMS Dashboard",
+      "company": "GREENFEED GROUP",
+      "period": "2020 — 2022",
+      "description": "Dashboard quản lý nội dung cho catalog sản phẩm, khuyến mãi và kiểm duyệt nội dung người dùng.",
+      "tech": ["Vue.js", "Node.js", "MySQL", "Elasticsearch"],
+      "metrics": "Content moderation, catalog management",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "HD Tower WebApp",
+      "company": "HD Tower (Sun Group)",
+      "period": "2020",
+      "description": "Website doanh nghiệp và webapp nội bộ quản lý dự án bất động sản và theo dõi doanh số.",
+      "tech": ["Vue.js", "Node.js", "MySQL"],
+      "metrics": "Sales tracking, project management",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "Vinmart Smart Control",
+      "company": "Vinmart",
+      "period": "2019 — 2020",
+      "description": "Hệ thống kiểm soát tồn kho với đặt hàng thông minh và chuỗi cung ứng visibility cho bán lẻ.",
+      "tech": ["React", "Node.js", "PostgreSQL", "Redis"],
+      "metrics": "Smart reordering, supply chain visibility",
+      "liveUrl": "",
+      "featured": false
+    },
+    {
+      "title": "Vietinbank Smart Branch",
+      "company": "Vietinbank",
+      "period": "2019",
+      "description": "Giao diện ngân hàng số cho smart branch với quản lý hàng đợi và self-service khách hàng.",
+      "tech": ["React", "Node.js", "PostgreSQL", "WebSockets"],
+      "metrics": "Queue management, self-service kiosks",
+      "liveUrl": "",
+      "featured": false
+    }
+  ],
+  "domains": [
+    "React",
+    "Vue.js",
+    "Go",
+    "Node.js",
+    "PostgreSQL",
+    "Kafka",
+    "Elasticsearch",
+    "Redis",
+    "AWS",
+    "Docker",
+    "System Design",
+    "Microservices"
+  ],
+  "context": {
+    "name": "Nguyễn Tùng Anh (Jeremy Nguyen)",
+    "title": "Kỹ Sư Phần Mềm | Technical Leader",
+    "bio": "Người yêu sách, kẻ tìm kiếm tri thức, và người đam mê công nghệ. Tôi tin rằng công nghệ là nghệ thuật giải quyết vấn đề.",
+    "philosophy": "Công nghệ là nghệ thuật giải quyết vấn đề. Sự đơn giản có khả năng mở rộng.",
+    "career": [
+      { "year": "2026 — Hiện tại", "role": "Technical Leader", "summary": "Dẫn dắt kỹ thuật tại YODY" },
+      { "year": "2024 — 2025", "role": "Software Developer", "summary": "Xây dựng hạ tầng e-commerce tại YODY" },
+      { "year": "2023", "role": "Software Engineer", "summary": "CRM và công cụ vận hành tại ScaleUP" },
+      { "year": "2022 — 2023", "role": "Software Engineer", "summary": "Nền tảng e-commerce tại Hoang Phuc" },
+      { "year": "2020 — 2022", "role": "Software Engineer", "summary": "B2B e-commerce tại GREENFEED" },
+      { "year": "2019 — 2020", "role": "Frontend Developer", "summary": "Frontend tại HD Tower, Vinmart, Vietinbank" }
+    ],
+    "domains": [
+      "React", "Vue.js", "Go", "Node.js", "PostgreSQL", "Kafka", "Elasticsearch", "Redis", "AWS", "Docker", "System Design", "Microservices"
+    ],
+    "projects": [
+      { "title": "Omnichannel Enabler", "description": "Nền tảng bán lẻ thống nhất với đồng bộ tồn kho real-time", "tech": ["Go", "React", "PostgreSQL", "Kafka"] },
+      { "title": "Hoang Phuc Ecommerce", "description": "Nền tảng thương mại điện tử đầy đủ với CMS tùy chỉnh", "tech": ["React", "Node.js", "PostgreSQL"] },
+      { "title": "GREENFEED Ecommerce", "description": "B2B thương mại điện tử nông nghiệp", "tech": ["Vue.js", "Node.js", "MySQL"] }
+    ],
+    "contact": {
+      "website": "https://jeremynguyen.tech",
+      "github": "https://github.com/jeremynguyen252",
+      "location": "Vietnam"
+    }
+  }
+}
