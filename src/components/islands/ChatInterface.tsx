@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useChatHistory } from '../../hooks/use-chat-history';
+import ChatMessageContent from '../../domains/chat/presentation/chat-message-content';
 
 interface Props {
   placeholder?: string;
@@ -79,16 +80,17 @@ export default function ChatInterface({
         buffer = lines.pop() || '';
 
         for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed.startsWith('data: ')) continue;
-          const data = trimmed.slice(6).trim();
-          if (data === '[DONE]') continue;
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6);
+          if (data.trim() === '[DONE]' || !data.trim()) continue;
 
-          assistantContent += data + ' ';
           try {
-            updateMessageContent(assistantId, assistantContent.trim());
+            const parsed = JSON.parse(data) as { content?: string };
+            if (!parsed.content) continue;
+            assistantContent += parsed.content;
+            updateMessageContent(assistantId, assistantContent);
           } catch {
-            // ignore race / stale ID
+            // ignore malformed payloads
           }
         }
       }
@@ -164,14 +166,14 @@ export default function ChatInterface({
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className="max-w-[85%] px-3.5 py-2.5 text-[13px] leading-relaxed"
+              className={msg.role === 'user' ? 'max-w-[85%] px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap' : 'max-w-[88%] px-4 py-3'}
               style={{
-                borderRadius: msg.role === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px',
+                borderRadius: msg.role === 'user' ? '14px 14px 4px 14px' : '18px 18px 18px 6px',
                 background: msg.role === 'user' ? 'var(--accent)' : 'var(--sand)',
                 color: msg.role === 'user' ? '#fff' : 'var(--ink)',
               }}
             >
-              {msg.content}
+              {msg.role === 'assistant' ? <ChatMessageContent content={msg.content} /> : msg.content}
             </div>
           </div>
         ))}

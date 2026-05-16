@@ -152,11 +152,7 @@ export async function POST(context: APIContext): Promise<Response> {
           { message: sanitized, context: contextText, lang },
           env
         )) {
-          const lines = chunk.split('\n');
-          for (const line of lines) {
-            controller.enqueue(encoder.encode(`data: ${line}\n`));
-          }
-          controller.enqueue(encoder.encode('\n'));
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content: chunk })}\n\n`));
         }
         controller.enqueue(encoder.encode('data: [DONE]\n\n'));
         controller.close();
@@ -165,7 +161,7 @@ export async function POST(context: APIContext): Promise<Response> {
           lang === 'vi'
             ? 'Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng thử lại sau.'
             : "Sorry, I'm having trouble connecting right now. Please try again later.";
-        controller.enqueue(encoder.encode(`data: ${errorMessage}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content: errorMessage })}\n\n`));
         controller.enqueue(encoder.encode('data: [DONE]\n\n'));
         controller.close();
       }
