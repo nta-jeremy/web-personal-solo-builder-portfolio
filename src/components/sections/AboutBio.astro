@@ -133,8 +133,9 @@ const headingHtml = heading.replace(
 
   @media (min-width: 1024px) {
     .about-bio-grid {
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 48px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(240px, 320px);
+      gap: clamp(48px, 6vw, 88px);
+      align-items: center;
     }
     .about-section-inner {
       padding-left: 56px;
@@ -156,7 +157,9 @@ const headingHtml = heading.replace(
       font-weight: 600;
     }
     .about-avatar {
-      width: 140px;
+      width: min(100%, 280px);
+      height: clamp(220px, 28vw, 320px);
+      justify-self: end;
       order: initial;
     }
     .about-bio-p:first-of-type::first-letter {
