@@ -9,23 +9,30 @@ export interface Props {
 const { translations, domains } = Astro.props;
 ---
 
-<section class="about-domains">
-  <span class="about-section-label">{t(translations, 'about.domainsLabel')}</span>
-  <div class="about-tags">
-    {domains.map((domain) => (
-      <span class="about-tag">{domain}</span>
-    ))}
+<section class="about-domains about-section reveal-section">
+  <div class="about-section-inner">
+    <span class="about-section-label">{t(translations, 'about.domainsLabel')}</span>
+    <span class="about-section-label-vertical">{t(translations, 'about.domainsLabel')}</span>
+    <div class="about-domains-grid">
+      {domains.map((domain, i) => (
+        <div class="about-domain-item reveal-tag" style={`--index: ${i}`}>
+          <span class="about-domain-dot" aria-hidden="true"></span>
+          <span class="about-domain-name">{domain}</span>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .about-domains {
-    margin-bottom: 32px;
+    margin-bottom: 0;
+    position: relative;
   }
-  @media (min-width: 768px) {
-    .about-domains {
-      margin-bottom: 48px;
-    }
+  .about-section-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 18px;
   }
   .about-section-label {
     display: block;
@@ -36,18 +43,56 @@ const { translations, domains } = Astro.props;
     font-weight: 600;
     margin-bottom: 14px;
   }
-  .about-tags {
+  .about-domains-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 20px;
+  }
+  .about-domain-item {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .about-tag {
-    border: 1px solid var(--border-2);
-    border-radius: 999px;
-    background: var(--bg-alt);
-    padding: 7px 14px;
-    font-size: 12.5px;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
     color: var(--ink-2);
-    letter-spacing: 0.02em;
   }
+  .about-domain-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .about-domain-name {
+    letter-spacing: 0.01em;
+  }
+  @media (min-width: 640px) {
+    .about-domains-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 768px) {
+    .about-section-inner {
+      padding-left: 56px;
+    }
+    .about-section-label {
+      display: none;
+    }
+    .about-section-label-vertical {
+      display: block;
+      position: absolute;
+      left: 18px;
+      top: 32px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+  }
+  .about-section-label-vertical {
+    display: none;
+  }
+
 </style>

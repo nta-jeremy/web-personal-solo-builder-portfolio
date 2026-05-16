@@ -8,21 +8,27 @@ export interface Props {
 const { translations } = Astro.props;
 ---
 
-<section class="about-philosophy">
-  <span class="about-section-label">{t(translations, 'about.philosophyLabel')}</span>
-  <blockquote class="about-quote">
-    <p class="serif">{t(translations, 'about.philosophyQuote')}</p>
-  </blockquote>
+<section class="about-philosophy about-section reveal-section">
+  <div class="about-section-inner">
+    <span class="about-section-label">{t(translations, 'about.philosophyLabel')}</span>
+    <span class="about-section-label-vertical">{t(translations, 'about.philosophyLabel')}</span>
+    <blockquote class="about-quote">
+      <span class="quote-mark open" aria-hidden="true">&ldquo;</span>
+      <p class="serif">{t(translations, 'about.philosophyQuote')}</p>
+      <span class="quote-mark close" aria-hidden="true">&rdquo;</span>
+    </blockquote>
+  </div>
 </section>
 
 <style>
   .about-philosophy {
-    margin-bottom: 32px;
+    margin-bottom: 0;
+    position: relative;
   }
-  @media (min-width: 768px) {
-    .about-philosophy {
-      margin-bottom: 48px;
-    }
+  .about-section-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 18px;
   }
   .about-section-label {
     display: block;
@@ -35,16 +41,79 @@ const { translations } = Astro.props;
   }
   .about-quote {
     margin: 0;
-    padding: 24px 28px;
-    border-left: 2px solid var(--accent);
-    background: var(--bg-alt);
-    border-radius: 0 10px 10px 0;
+    padding: 40px 0;
+    border-left: none;
+    background: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
+  .about-quote::before,
+  .about-quote::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 1px;
+    background: var(--border-2);
+    margin: 0 auto;
+  }
+  .about-quote::before { margin-bottom: 24px; }
+  .about-quote::after { margin-top: 24px; }
   .about-quote p {
     font-style: italic;
-    font-size: 18px;
+    font-size: clamp(16px, 2.5vw, 20px);
     line-height: 1.5;
-    margin: 0;
+    margin: 0 auto;
     color: var(--ink);
+    max-width: 640px;
+    position: relative;
+    z-index: 1;
+    padding: 0 12px;
+  }
+  .quote-mark {
+    position: absolute;
+    font-family: var(--font-serif);
+    font-size: 80px;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
+    user-select: none;
+  }
+  .quote-mark.open { top: -16px; left: 4%; }
+  .quote-mark.close { bottom: -16px; right: 4%; }
+
+  @media (min-width: 768px) {
+    .about-quote p {
+      font-size: 22px;
+      padding: 0 24px;
+    }
+    .quote-mark {
+      font-size: 110px;
+    }
+    .quote-mark.open { top: -20px; left: 8%; }
+    .quote-mark.close { bottom: -20px; right: 8%; }
+    .about-section-inner {
+      padding-left: 56px;
+    }
+    .about-section-label {
+      display: none;
+    }
+    .about-section-label-vertical {
+      display: block;
+      position: absolute;
+      left: 18px;
+      top: 32px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+  }
+  .about-section-label-vertical {
+    display: none;
   }
 </style>
