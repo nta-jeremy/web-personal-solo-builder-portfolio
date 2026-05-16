@@ -3,33 +3,46 @@ import { t } from '@/i18n/utils';
 
 export interface Props {
   translations: Record<string, unknown>;
+  locale?: 'en' | 'vi';
 }
 
-const { translations } = Astro.props;
+const { translations, locale = 'en' } = Astro.props;
+
+const heading = t(translations, 'about.heading');
+const avatarLabel = locale === 'en' ? 'Portrait placeholder' : 'Khung chân dung';
+const accentWord = locale === 'en' ? 'scale' : 'mở rộng';
+const headingHtml = heading.replace(
+  new RegExp(`(${accentWord})`, 'i'),
+  '<span class="about-heading-accent">$1</span>'
+);
 ---
 
-<section class="about-bio">
-  <span class="about-label">{t(translations, 'about.label')}</span>
-  <div class="about-bio-grid">
-    <div class="about-bio-text">
-      <h1 class="serif about-heading">{t(translations, 'about.heading')}</h1>
-      <p class="about-bio-p">{t(translations, 'about.bio1')}</p>
-      <p class="about-bio-p">{t(translations, 'about.bio2')}</p>
-    </div>
-    <div class="about-avatar" aria-label="Avatar placeholder">
-      <div class="about-avatar-overlay"></div>
+<section class="about-bio about-section reveal-section">
+  <div class="about-section-inner">
+    <span class="about-label">{t(translations, 'about.label')}</span>
+    <span class="about-section-label-vertical">{t(translations, 'about.label')}</span>
+    <div class="about-bio-grid">
+      <div class="about-bio-text">
+        <h1 class="serif about-heading" set:html={headingHtml}></h1>
+        <p class="about-bio-p">{t(translations, 'about.bio1')}</p>
+        <p class="about-bio-p">{t(translations, 'about.bio2')}</p>
+      </div>
+      <div class="about-avatar" role="img" aria-label={avatarLabel}>
+        <div class="about-avatar-overlay"></div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .about-bio {
-    margin-bottom: 32px;
+    position: relative;
+    margin-bottom: 0;
   }
-  @media (min-width: 768px) {
-    .about-bio {
-      margin-bottom: 48px;
-    }
+  .about-section-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 18px;
   }
   .about-label {
     display: block;
@@ -47,11 +60,17 @@ const { translations } = Astro.props;
     align-items: start;
   }
   .about-heading {
-    font-size: 52px;
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
     margin: 0 0 28px;
+  }
+  .about-heading-accent {
+    background: linear-gradient(135deg, var(--ink) 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   .about-bio-p {
     font-size: 16px;
@@ -62,32 +81,97 @@ const { translations } = Astro.props;
   .about-bio-p:last-child {
     margin-bottom: 0;
   }
+  .about-bio-p:first-of-type::first-letter {
+    font-family: var(--font-serif);
+    font-size: 3.2em;
+    float: left;
+    line-height: 0.85;
+    margin-right: 8px;
+    margin-top: 4px;
+    color: var(--accent);
+  }
   .about-avatar {
-    width: 160px;
-    height: 200px;
+    width: 100%;
+    height: 180px;
     border-radius: 12px;
     background: linear-gradient(160deg, #d08a65, #6b3a28);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    order: -1;
   }
   .about-avatar-overlay {
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at 50% 30%, rgba(255, 240, 220, 0.2) 0 25%, transparent 28%);
   }
-  @media (min-width: 768px) {
+
+  .about-bio::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(209,122,88,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(234,230,216,0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(251,249,243,0.6) 0%, transparent 60%);
+    background-size: 200% 200%;
+    animation: ambientShift 24s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes ambientShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+  [data-theme="dark"] .about-bio::before {
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(209,122,88,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(46,43,39,0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(30,28,25,0.5) 0%, transparent 60%);
+  }
+
+  @media (min-width: 1024px) {
     .about-bio-grid {
-      grid-template-columns: 1fr 160px;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 48px;
     }
-  }
-  @media (max-width: 767px) {
+    .about-section-inner {
+      padding-left: 56px;
+    }
+    .about-label {
+      display: none;
+    }
+    .about-section-label-vertical {
+      display: block;
+      position: absolute;
+      left: 18px;
+      top: 32px;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
     .about-avatar {
-      width: 100%;
-      height: 180px;
-      order: -1;
+      width: 140px;
+      order: initial;
+    }
+    .about-bio-p:first-of-type::first-letter {
+      font-size: 3.2em;
+    }
+  }
+  .about-section-label-vertical {
+    display: none;
+  }
+  .about-bio-p:first-of-type::first-letter {
+    font-size: 2.8em;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-bio::before {
+      animation: none;
     }
   }
 </style>
