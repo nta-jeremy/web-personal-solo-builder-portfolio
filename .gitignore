@@ -105,3 +105,6 @@ external/
 # Git worktrees (local development only)
 worktrees/
 
+# Local agent skill catalog runtime (large mirror of ~/.agents/skills)
+.agents/
+
