@@ -108,3 +108,6 @@ worktrees/
 # Local agent skill catalog runtime (large mirror of ~/.agents/skills)
 .agents/
 
+# Codex hook runtime logs
+.codex/hooks/.logs/
+
